@@ -1,3 +1,4 @@
+require("dotenv").config(); // Load .env file to process .env
 import express from "express";
 import cors from "cors";
 import dataController from "./6-controllers/data-controller";

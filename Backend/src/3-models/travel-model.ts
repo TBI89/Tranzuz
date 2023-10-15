@@ -9,7 +9,7 @@ export interface ITravelModel extends Document {
 export const TravelSchema = new Schema<ITravelModel>({
     travelName: {
         type: String,
-        required: [true, "Please enter the travel name."]
+        required: [true, "יש לבחור שם נסיעה."]
     }
 }, {
     versionKey: false

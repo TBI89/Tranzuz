@@ -9,7 +9,7 @@ export interface ISourceModel extends Document {
 export const SourceSchema = new Schema<ISourceModel>({
     sourceName: {
         type: String,
-        required: [true, "Please enter the source name."]
+        required: [true, "יש להזין את שם המקור."]
     }
 },{
     versionKey: false

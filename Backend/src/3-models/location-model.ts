@@ -2,15 +2,21 @@ import {Document, Schema, model} from "mongoose";
 
 // 1. Interface:
 export interface ILocationModel extends Document {
-    locationName: string;
+    startingPoint: string;
+    destination: string;
 }
 
 // 2. Schema:
 export const LocationSchema = new Schema<ILocationModel>({
-    locationName: {
+    startingPoint: {
         type: String,
-        required: [true, "Please enter the location name."]
+        required: [true, "יש להזין את נקודת המוצא."]
+    },
+    destination: {
+        type: String,
+        required: [true, "יש להזין יעד."]
     }
+
 },{
     versionKey: false
 });

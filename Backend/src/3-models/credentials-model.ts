@@ -10,12 +10,12 @@ export interface ICredentialsModel extends Document {
 export const CredentialsSchema = new Schema<ICredentialsModel>({
     email: {
         type: String,
-        required: [true, "Please enter your email."]
+        required: [true, "יש להזין את כתובת המייל."]
         // Add custom validation.
     },
     password: {
         type: String,
-        required: [true, "Please enter your password."]
+        required: [true, "יש להזין סיסמא."]
         // Add custom validation.
     }
 },{

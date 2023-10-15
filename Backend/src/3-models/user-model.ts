@@ -12,25 +12,25 @@ export interface IUserModel extends Document {
 export const UserSchema = new Schema<IUserModel>({
     firstName: {
         type: String,
-        required: [true, "Please enter your first name."],
-        minlength: [2, "First name has to contain at least 2 characters."],
-        maxlength: [30, "First name can't contain more then 30 characters."]
+        required: [true, "יש להזין שם פרטי"],
+        minlength: [2, "שם פרטי חייב להכיל לפחות 2 תווים."],
+        maxlength: [30, "שם פרטי יכול להכיל 30 תווים לכל היותר."]
     },
     lastName: {
         type: String,
-        required: [true, "Please enter your last name."],
-        minlength: [2, "Last name has to contain at least 2 characters."],
-        maxlength: [30, "Last name can't contain more then 30 characters."]
+        required: [true, "יש להזין שם משפחה."],
+        minlength: [2, "שם משפחה חייב להכיל לפחות 2 תווים."],
+        maxlength: [30, "שם משפחה יכול להכיל 30 תווים לכל היותר."]
     },
     password: {
         type: String,
-        required: [true, "Please enter your password."],
-        minlength: [8, "Password has to contain at least 8 characters."]
+        required: [true, "יש להזין סיסמא."],
+        minlength: [8, "הסיסמא חייבת להכיל לפחות 8 תווים."]
         // Add custom validation for strong password.    
     },
     email: {
         type: String,
-        required: [true, "Please enter your email."],
+        required: [true, "יש להזין את כתובת המייל."],
         // Add custom validation for the email format & uniqueness.
     }
 }, {
