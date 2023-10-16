@@ -108,11 +108,26 @@ export const MissionSchema = new Schema<IMissionModel>({
 });
 
 // 3. Virtuals:
-MissionSchema.virtual("locations", {
-    ref: LocationModel, // Foreign model.
-    localField: "stations.startingPoint", // or "stations.destination", depending on the context
-    foreignField: "_id", // Primary key of the LocationModel.
-    justOne: true // Mission has only one location (startingPoint / destination).
+MissionSchema.virtual("startingPointLocation", {
+    ref: LocationModel,
+    localField: "stations.startingPoint",
+    foreignField: "_id",
+    justOne: true,
+    populate: {
+        path: "startingPoint destination",
+        model: LocationModel
+    }
+});
+
+MissionSchema.virtual("destinationLocation", {
+    ref: LocationModel,
+    localField: "stations.destination",
+    foreignField: "_id",
+    justOne: true,
+    populate: {
+        path: "destination destination",
+        model: LocationModel
+    }
 });
 
 MissionSchema.virtual("travelCode", {

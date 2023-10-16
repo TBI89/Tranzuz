@@ -7,9 +7,14 @@ function getAllMissions(): Promise<any[]> {
         .populate('travelCode')
         .populate('source')
         .populate({
-            path: 'stations.startingPoint stations.destination',
-            model: LocationModel,
-            select: 'locationName'
+            path: 'startingPointLocation', // Populate the 'startingPoint' virtual.
+            select: 'locationName', // Select the locationName field.
+            model: LocationModel
+        })
+        .populate({
+            path: 'destinationLocation', // Populate the 'destination' virtual.
+            select: 'locationName', // Select the locationName field.
+            model: LocationModel
         })
         .exec()
         .then((missions: any[]) => {
@@ -18,13 +23,14 @@ function getAllMissions(): Promise<any[]> {
                     ...mission.toObject(),
                     travelId: mission.travelCode ? mission.travelCode.travelCode : null,
                     sourceId: mission.source ? mission.source.sourceName : null,
-                    startingPoint: mission.stations.startingPoint ? mission.stations.startingPoint.locationName : null,
-                    destination: mission.stations.destination ? mission.stations.destination.locationName : null
+                    stations: {
+                        startingPoint: mission.startingPointLocation ? mission.startingPointLocation.locationName : null,
+                        destination: mission.destinationLocation ? mission.destinationLocation.locationName : null
+                    }
                 };
             });
         });
 }
-
 
 export default {
     getAllMissions
