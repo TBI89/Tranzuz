@@ -8,13 +8,16 @@ export interface IMissionModel extends Document {
     missionNumber: number;
     direction: number;
     alternative: string; // or number?
-    locationId: ObjectId; // location collection (startingPoint / destination).
+    stations: { // locations collection(locationName).
+        startingPoint: ObjectId;
+        destination: ObjectId;  
+    }
     description: string;
-    travelId: ObjectId; // Travel collection (travelName).
+    travelId: ObjectId; // travels collection (travelCode).
     departureTime: string; // localTimeSting.
     effectiveDepartureTime: string; // localTimeString.
-    dayOfTheWeek: string; // localDateString.
-    startingDate: string; // localDateString.
+    dayOfTheWeek: number; // localDateString.
+    startingDate: Date; // localDateString.
     endingDate: string; // localDateString.
     sourceId: ObjectId; // source collection (sourceName).
     missionType: string;
@@ -37,8 +40,17 @@ export const MissionSchema = new Schema<IMissionModel>({
     alternative: {
         type: String
     },
-    locationId: {
-        type: mongoose.Schema.Types.ObjectId
+    stations: {
+        startingPoint: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: LocationModel, 
+            required: true,
+        },
+        destination: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: LocationModel, 
+            required: true,
+        },
     },
     description: {
         type: String,
@@ -56,12 +68,12 @@ export const MissionSchema = new Schema<IMissionModel>({
         required: [true, "יש להזין שעת יציאה אפקטיבית."]
     },
     dayOfTheWeek: {
-        type: String,
+        type: Number,
         required: [true, "יש לבחור יום."]
         // Add custom validation for possible days to enter.
     },
     startingDate: {
-        type: String,
+        type: Date,
         required: [true, "יש לבחור תאריך התחלה."]
         // Add custom validation for picking a valid starting date.
     },
@@ -93,14 +105,13 @@ export const MissionSchema = new Schema<IMissionModel>({
     versionKey: false,
     toJSON: { virtuals: true }, // Return foreign key in JSON.
     id: false // Don't add id on top of _id.
-
 });
 
 // 3. Virtuals:
 MissionSchema.virtual("locations", {
     ref: LocationModel, // Foreign model.
-    localField: "locationId", // Foreign key.
-    foreignField: "_id", // Primary key.
+    localField: "stations.startingPoint", // or "stations.destination", depending on the context
+    foreignField: "_id", // Primary key of the LocationModel.
     justOne: true // Mission has only one location (startingPoint / destination).
 });
 
