@@ -6,7 +6,9 @@ export interface ILineModel extends Document {
     lineNumber: number;
     direction: number;
     alternative: string;
+    description: string;
 }
+
 // 2. Schema:
 export const LineSchema = new Schema<ILineModel>({
     lineId: {
@@ -23,9 +25,15 @@ export const LineSchema = new Schema<ILineModel>({
     },
     alternative: {
         type: String
+    },
+    description: {
+        type: String,
+        required: [true, "יש להזין את תיאור הקו."]
     }
 
-}, {});
+}, {
+    versionKey: false
+});
 
 // 3. Model:
 export const LineModel = model<ILineModel>("LineModel", LineSchema, "lines");

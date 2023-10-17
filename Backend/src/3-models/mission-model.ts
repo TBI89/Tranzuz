@@ -6,23 +6,23 @@ import { LineModel } from "./line-model";
 
 // 1. Interface:
 export interface IMissionModel extends Document {
-    lineData: {
+    lineData:  { // lines collection.
         lineId: ObjectId;
         lineNumber: ObjectId;
         direction: ObjectId;
         alternative: ObjectId;
+        description: ObjectId;
     }
     stops: { // locations collection(locationName).
         startingPoint: ObjectId;
         destination: ObjectId;
     }
-    description: string;
     tripId: ObjectId; // trips collection (tripId).
-    departureTime: string; // localTimeSting.
+    departureTime: string; 
     effectiveDepartureTime: string; // localTimeString.
-    dayOfTheWeek: number; // localDateString.
-    startingDate: Date; // localDateString.
-    endingDate: string; // localDateString.
+    dayOfTheWeek: number; 
+    startingDate: string; 
+    endingDate: string; 
     sourceId: ObjectId; // source collection (sourceName).
     missionType: string;
     affectedMission: number;
@@ -49,8 +49,12 @@ export const MissionSchema = new Schema<IMissionModel>({
         },
         alternative: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: LineModel,
+            ref: LineModel
         },
+        description: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: LineModel
+        }
     },
 
     stops: {
@@ -64,10 +68,6 @@ export const MissionSchema = new Schema<IMissionModel>({
             ref: LocationModel,
             required: [true, "יש להזין יעד."]
         },
-    },
-    description: {
-        type: String,
-        required: [true, "יש להזין תיאור."]
     },
     tripId: {
         type: mongoose.Schema.Types.ObjectId
@@ -86,7 +86,7 @@ export const MissionSchema = new Schema<IMissionModel>({
         // Add custom validation for possible days to enter.
     },
     startingDate: {
-        type: Date,
+        type: String,
         required: [true, "יש לבחור תאריך התחלה."]
         // Add custom validation for picking a valid starting date.
     },
@@ -127,21 +127,31 @@ MissionSchema.virtual("lineIdVirtual", {
     foreignField: "_id", 
     justOne: true,
 });
+
 MissionSchema.virtual("lineNumberVirtual", {
     ref: LineModel, 
     localField: "lineData.lineNumber", 
     foreignField: "_id", 
     justOne: true,
 });
+
 MissionSchema.virtual("lineDirectionVirtual", {
     ref: LineModel, 
     localField: "lineData.direction", 
     foreignField: "_id", 
     justOne: true,
 });
+
 MissionSchema.virtual("lineAlternativeVirtual", {
     ref: LineModel, 
     localField: "lineData.alternative", 
+    foreignField: "_id", 
+    justOne: true,
+});
+
+MissionSchema.virtual("lineDescriptionVirtual", {
+    ref: LineModel, 
+    localField: "lineData.description", 
     foreignField: "_id", 
     justOne: true,
 });
@@ -156,6 +166,7 @@ MissionSchema.virtual("startingPointVirtual", {
         model: LocationModel
     }
 });
+
 MissionSchema.virtual("destinationVirtual", {
     ref: LocationModel,
     localField: "stops.destination",

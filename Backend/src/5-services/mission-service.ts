@@ -20,6 +20,7 @@ function getAllMissions(): Promise<any[]> {
         .populate('lineNumberVirtual', 'lineNumber') // Populate the 'lineNumber' virtual and select the 'lineNumber' field.
         .populate('lineDirectionVirtual', 'direction') // Populate the 'lineDirection' virtual and select the 'direction' field.
         .populate('lineAlternativeVirtual', 'alternative') // Populate the 'lineAlternative' virtual and select the 'alternative' field.
+        .populate('lineDescriptionVirtual', 'description') // Populate the 'lineDescription' virtual and select the 'description' field.
         .exec()
         .then((missions: any[]) => {
             return missions.map(mission => {
@@ -35,7 +36,8 @@ function getAllMissions(): Promise<any[]> {
                         lineId: mission.lineIdVirtual ? mission.lineIdVirtual.lineId : null,
                         lineNumber: mission.lineNumberVirtual ? mission.lineNumberVirtual.lineNumber : null,
                         direction: mission.lineDirectionVirtual ? mission.lineDirectionVirtual.direction : null,
-                        alternative: mission.lineAlternativeVirtual ? mission.lineAlternativeVirtual.alternative : null
+                        alternative: mission.lineAlternativeVirtual ? mission.lineAlternativeVirtual.alternative : null,
+                        description: mission.lineDescriptionVirtual ? mission.lineDescriptionVirtual.description : null
                     }
                 };
             });
