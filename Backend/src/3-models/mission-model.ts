@@ -1,19 +1,23 @@
 import mongoose, { Document, ObjectId, Schema, model } from "mongoose";
 import { LocationModel } from "./location-model";
-import { TravelModel } from "./travel-model";
+import { TripModel } from "./trip-model";
 import { SourceModel } from "./source-model";
+import { LineModel } from "./line-model";
 
 // 1. Interface:
 export interface IMissionModel extends Document {
-    missionNumber: number;
-    direction: number;
-    alternative: string; // or number?
-    stations: { // locations collection(locationName).
+    lineData: {
+        lineId: ObjectId;
+        lineNumber: ObjectId;
+        direction: ObjectId;
+        alternative: ObjectId;
+    }
+    stops: { // locations collection(locationName).
         startingPoint: ObjectId;
-        destination: ObjectId;  
+        destination: ObjectId;
     }
     description: string;
-    travelId: ObjectId; // travels collection (travelCode).
+    tripId: ObjectId; // trips collection (tripId).
     departureTime: string; // localTimeSting.
     effectiveDepartureTime: string; // localTimeString.
     dayOfTheWeek: number; // localDateString.
@@ -23,40 +27,49 @@ export interface IMissionModel extends Document {
     missionType: string;
     affectedMission: number;
     affectedMissionDirection: number;
-    affectedMissionAlternative: string; // or number?
+    affectedMissionAlternative: string;
     affectedMissionDescription: string;
 }
 
 // 2. Schema:
 export const MissionSchema = new Schema<IMissionModel>({
-    missionNumber: {
-        type: Number,
-        required: [true, "יש להזין את מספר הקו."]
+
+    lineData: {
+        lineId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: LineModel
+        },
+        lineNumber: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: LineModel
+        },
+        direction: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: LineModel
+        },
+        alternative: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: LineModel,
+        },
     },
-    direction: {
-        type: Number,
-        required: [true, "יש להזין כיוון."]
-    },
-    alternative: {
-        type: String
-    },
-    stations: {
+
+    stops: {
         startingPoint: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: LocationModel, 
-            required: true,
+            ref: LocationModel,
+            required: [true, "יש להזין את נקודת המוצא"]
         },
         destination: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: LocationModel, 
-            required: true,
+            ref: LocationModel,
+            required: [true, "יש להזין יעד."]
         },
     },
     description: {
         type: String,
         required: [true, "יש להזין תיאור."]
     },
-    travelId: {
+    tripId: {
         type: mongoose.Schema.Types.ObjectId
     },
     departureTime: {
@@ -83,7 +96,7 @@ export const MissionSchema = new Schema<IMissionModel>({
         // Add custom validation for picking a valid ending date.
     },
     sourceId: {
-        type: mongoose.Schema.Types.ObjectId
+        type: mongoose.Schema.Types.ObjectId,
     },
     missionType: {
         type: String,
@@ -108,9 +121,34 @@ export const MissionSchema = new Schema<IMissionModel>({
 });
 
 // 3. Virtuals:
-MissionSchema.virtual("startingPointLocation", {
+MissionSchema.virtual("lineIdVirtual", {
+    ref: LineModel, 
+    localField: "lineData.lineId", 
+    foreignField: "_id", 
+    justOne: true,
+});
+MissionSchema.virtual("lineNumberVirtual", {
+    ref: LineModel, 
+    localField: "lineData.lineNumber", 
+    foreignField: "_id", 
+    justOne: true,
+});
+MissionSchema.virtual("lineDirectionVirtual", {
+    ref: LineModel, 
+    localField: "lineData.direction", 
+    foreignField: "_id", 
+    justOne: true,
+});
+MissionSchema.virtual("lineAlternativeVirtual", {
+    ref: LineModel, 
+    localField: "lineData.alternative", 
+    foreignField: "_id", 
+    justOne: true,
+});
+
+MissionSchema.virtual("startingPointVirtual", {
     ref: LocationModel,
-    localField: "stations.startingPoint",
+    localField: "stops.startingPoint",
     foreignField: "_id",
     justOne: true,
     populate: {
@@ -118,10 +156,9 @@ MissionSchema.virtual("startingPointLocation", {
         model: LocationModel
     }
 });
-
-MissionSchema.virtual("destinationLocation", {
+MissionSchema.virtual("destinationVirtual", {
     ref: LocationModel,
-    localField: "stations.destination",
+    localField: "stops.destination",
     foreignField: "_id",
     justOne: true,
     populate: {
@@ -130,14 +167,14 @@ MissionSchema.virtual("destinationLocation", {
     }
 });
 
-MissionSchema.virtual("travelCode", {
-    ref: TravelModel, // Foreign model.
-    localField: "travelId", // Foreign key.
+MissionSchema.virtual("tripIdVirtual", {
+    ref: TripModel, // Foreign model.
+    localField: "tripId", // Foreign key.
     foreignField: "_id", // Primary key.
-    justOne: true // Mission has only one travelId.
+    justOne: true // Mission has only one tripId.
 });
 
-MissionSchema.virtual("source", {
+MissionSchema.virtual("sourceIdVirtual", {
     ref: SourceModel, // Foreign model.
     localField: "sourceId", // Foreign key.
     foreignField: "_id", // Primary key.

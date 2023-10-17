@@ -19,7 +19,7 @@ async function login(credentials: ICredentialsModel): Promise<string> {
     credentials.password = cyber.hashedPassword(credentials.password); // Hash the entered password. 
     const user = await UserModel.findOne({ email: credentials.email, password: credentials.password });
     if (!user) {
-        throw new UnauthorizedError("Email or password are wrong"); // If user doesn't exist or passwords don't match: throw 401.
+        throw new UnauthorizedError("מייל או סיסמא שגויים."); // If user doesn't exist or passwords don't match: throw 401.
     }
     const token = cyber.getNewToken(user); // Generate token for the user.
     return token;

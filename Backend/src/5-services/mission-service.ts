@@ -4,28 +4,38 @@ import { MissionModel } from "../3-models/mission-model";
 // Get all missions:
 function getAllMissions(): Promise<any[]> {
     return MissionModel.find()
-        .populate('travelCode')
-        .populate('source')
+        .populate('tripIdVirtual', 'tripId') // Populate the 'tripId' virtual and select the 'tripId' field.
+        .populate('sourceIdVirtual', 'sourceName') // Populate the 'sourceId' virtual and select the 'sourceName' field.
         .populate({
-            path: 'startingPointLocation', // Populate the 'startingPoint' virtual.
-            select: 'locationName', // Select the locationName field.
+            path: 'startingPointVirtual', // Populate the 'startingPointVirtual' virtual.
+            select: 'locationName', // Select the 'locationName' field.
             model: LocationModel
         })
         .populate({
-            path: 'destinationLocation', // Populate the 'destination' virtual.
-            select: 'locationName', // Select the locationName field.
+            path: 'destinationVirtual', // Populate the 'destinationVirtual' virtual.
+            select: 'locationName', // Select the 'locationName' field.
             model: LocationModel
         })
+        .populate('lineIdVirtual', 'lineId') // Populate the 'lineId' virtual and select the 'lineId' field.
+        .populate('lineNumberVirtual', 'lineNumber') // Populate the 'lineNumber' virtual and select the 'lineNumber' field.
+        .populate('lineDirectionVirtual', 'direction') // Populate the 'lineDirection' virtual and select the 'direction' field.
+        .populate('lineAlternativeVirtual', 'alternative') // Populate the 'lineAlternative' virtual and select the 'alternative' field.
         .exec()
         .then((missions: any[]) => {
             return missions.map(mission => {
                 return {
                     ...mission.toObject(),
-                    travelId: mission.travelCode ? mission.travelCode.travelCode : null,
-                    sourceId: mission.source ? mission.source.sourceName : null,
-                    stations: {
-                        startingPoint: mission.startingPointLocation ? mission.startingPointLocation.locationName : null,
-                        destination: mission.destinationLocation ? mission.destinationLocation.locationName : null
+                    tripId: mission.tripIdVirtual ? mission.tripIdVirtual.tripId : null,
+                    sourceId: mission.sourceIdVirtual ? mission.sourceIdVirtual.sourceName : null,
+                    stops: {
+                        startingPoint: mission.startingPointVirtual ? mission.startingPointVirtual.locationName : null,
+                        destination: mission.destinationVirtual ? mission.destinationVirtual.locationName : null
+                    },
+                    lineData: {
+                        lineId: mission.lineIdVirtual ? mission.lineIdVirtual.lineId : null,
+                        lineNumber: mission.lineNumberVirtual ? mission.lineNumberVirtual.lineNumber : null,
+                        direction: mission.lineDirectionVirtual ? mission.lineDirectionVirtual.direction : null,
+                        alternative: mission.lineAlternativeVirtual ? mission.lineAlternativeVirtual.alternative : null
                     }
                 };
             });
@@ -34,4 +44,4 @@ function getAllMissions(): Promise<any[]> {
 
 export default {
     getAllMissions
-}
+};

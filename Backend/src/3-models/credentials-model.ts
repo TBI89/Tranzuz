@@ -11,7 +11,6 @@ export const CredentialsSchema = new Schema<ICredentialsModel>({
     email: {
         type: String,
         required: [true, "יש להזין את כתובת המייל."]
-        // Add custom validation.
     },
     password: {
         type: String,
