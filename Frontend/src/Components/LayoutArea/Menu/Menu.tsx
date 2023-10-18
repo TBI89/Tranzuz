@@ -4,11 +4,9 @@ import "./Menu.css";
 function Menu(): JSX.Element {
     return (
         <div className="Menu">
-			<NavLink to="/home">Home</NavLink>
+			<NavLink to="/home">דף הבית</NavLink>
             <span> | </span>
-			<NavLink to="/list">List</NavLink>
-            <span> | </span>
-			<NavLink to="/insert">Insert</NavLink>
+			<NavLink to="/missions">כל המשימות</NavLink>
         </div>
     );
 }

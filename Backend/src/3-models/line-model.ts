@@ -13,7 +13,7 @@ export interface ILineModel extends Document {
 export const LineSchema = new Schema<ILineModel>({
     lineId: {
         type: Number,
-        required: [true, "יש להזין מקט קו."]
+        required: [true, "יש להזין מזהה קו."]
     },
     lineNumber: {
         type: Number,

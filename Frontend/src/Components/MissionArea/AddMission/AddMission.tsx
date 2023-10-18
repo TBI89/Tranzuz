@@ -1,6 +1,6 @@
-import "./Insert.css";
+import "./AddMission.css";
 
-function Insert(): JSX.Element {
+function AddMission(): JSX.Element {
     return (
         <div className="Insert">
 			<h2>Insert Page</h2>
@@ -8,4 +8,4 @@ function Insert(): JSX.Element {
     );
 }
 
-export default Insert;
+export default AddMission;

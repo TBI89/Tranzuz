@@ -17,7 +17,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1MmU0MTczZDhiNWQ5YjQ3MzZlZjQwNCIsImZpcnN0TmFtZSI6Iteq15XXnteoIiwibGFzdE5hbWUiOiLXkdefLdeZ16nXqNeQ15wiLCJwYXNzd29yZCI6IjM2YmRiYmIxOGFhMGM5MTQ4MDhkOWQyM2IyMWViOTk2NTRlNDQ2YTBkNjExMWMxNWU3YTFmNjVjNDE3MTkwODAzM2Q2NjRjNmFkNWRlMTc1YmZiNGJmZjkwNTJhZTIwZGI2ODA3ZDkyZDUzMzA4YjU2YmVhZjYyMDNlNjMxN2M4IiwiZW1haWwiOiJ0b21lcmJlbjg5QGdtYWlsLmNvbSJ9LCJpYXQiOjE2OTc1MzA5MzksImV4cCI6MTY5NzU0MTczOX0.66bl_VVkLAbiHjXhVoEJMPl6fhEOMKEOADuf74hNsqs",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1MmU0MTczZDhiNWQ5YjQ3MzZlZjQwNCIsImZpcnN0TmFtZSI6Iteq15XXnteoIiwibGFzdE5hbWUiOiLXkdefLdeZ16nXqNeQ15wiLCJwYXNzd29yZCI6IjM2YmRiYmIxOGFhMGM5MTQ4MDhkOWQyM2IyMWViOTk2NTRlNDQ2YTBkNjExMWMxNWU3YTFmNjVjNDE3MTkwODAzM2Q2NjRjNmFkNWRlMTc1YmZiNGJmZjkwNTJhZTIwZGI2ODA3ZDkyZDUzMzA4YjU2YmVhZjYyMDNlNjMxN2M4IiwiZW1haWwiOiJ0b21lcmJlbjg5QGdtYWlsLmNvbSJ9LCJpYXQiOjE2OTc2MTczMjYsImV4cCI6MTY5NzYyODEyNn0.cTz2E-MK56G7oevOIKViFXsxFXIG5cQ1M95aid-Kkyg",
 									"type": "string"
 								}
 							]
@@ -51,7 +51,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"firstName\": \"תומר\",\r\n    \"lastName\": \"בן-ישראל\",\r\n    \"password\": \"12345678\",\r\n    \"email\": \"tomerben89@gmail.com\"\r\n}",
+							"raw": "{\r\n    \"firstName\": \"תומר\",\r\n    \"lastName\": \"בן-ישראל\",\r\n    \"password\": \"12345678\",\r\n    \"email\": \"tomerben899@gmail.com\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

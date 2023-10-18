@@ -16,7 +16,6 @@ export class AuthState {
             this.user = jwtDecode<{ user: UserModel }>(this.token).user;
         }
     }
-
 }
 
 // 2. Action type:

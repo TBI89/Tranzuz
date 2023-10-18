@@ -1,21 +1,29 @@
+import LineModel from "./LineModel";
+import LocationModel from "./LocationModel";
+import SourceModel from "./SourceModel";
+import TripModel from "./TripModel";
+
 class MissionModel {
 
     // Model:
-    public missionNumber: number;
-    public direction: number;
-    public alternative: string;
-    public stops: {
-        startingPoint: string;
-        destination: string;
+    public lineData: {
+        lineId: LineModel;
+        lineNumber: LineModel;
+        direction: LineModel;
+        alternative: LineModel;
+        description: LineModel;
     }
-    public description: string;
-    public tripId: number;
+    public stops: {
+        startingPoint: LocationModel;
+        destination: LocationModel;
+    }
+    public tripId: TripModel;
     public departureTime: string;
     public effectiveDepartureTime: string;
     public dayOfTheWeek: number;
     public startingDate: Date;
     public endingDate: string;
-    public sourceId: string;
+    public sourceId: SourceModel;
     public missionType: string;
     public affectedMission: number;
     public affectedMissionDirection: number;
@@ -23,21 +31,6 @@ class MissionModel {
     public affectedMissionDescription: string;
 
     // Custom validation:
-    public static missionNumberValidation = {
-        required: { value: true, message: "יש להזין את מספר הקו." }
-    }
-    public static directionValidation = {
-        required: { value: true, message: "יש להזין כיוון." }
-    } 
-
-    // ADD THE STOPS VALIDATION!
-
-    public static descriptionValidation = {
-        required: { value: true, message: "יש להזין תיאור." }
-    }
-    public static tripIdValidation = {
-        required: { value: true, message: "יש לבחור מס' נסיעה." }
-    }
     public static departureValidation = {
         required: { value: true, message: "יש להזין שעת יציאה." }
     }
@@ -53,13 +46,9 @@ class MissionModel {
     public static endingDateValidation = {
         required: { value: true, message: "יש לבחור תאריך סיום." }
     }
-    public static sourceIdDateValidation = {
-        required: { value: true, message: "יש לבחור את שם המקור." }
-    }
     public static missionTypeValidation = {
         required: { value: true, message: "יש לבחור סוג." }
     }
-
 }
 
 export default MissionModel;
