@@ -1,3 +1,25 @@
-.Login {
-	
+.Login>form {
+    border: 1px solid;
+    width: 250px;
+    display: grid;
+    justify-content: center;
+    padding: 10px 0;
+    margin: auto;
+    text-align: right;
+    border-radius: 10px;
+    box-shadow: 3px 6px 9px;
+    background-color: wheat
+}
+
+.Login>label,
+input {
+    font-size: large;
+    margin-top: 5px;
+    width: 175px;
+}
+
+.ButtonLogin {
+    cursor: pointer;
+    width: 50px;
+    margin: auto;
 }

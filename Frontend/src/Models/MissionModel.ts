@@ -6,24 +6,25 @@ import TripModel from "./TripModel";
 class MissionModel {
 
     // Model:
+    public _id: number;
     public lineData: {
-        lineId: LineModel;
-        lineNumber: LineModel;
-        direction: LineModel;
-        alternative: LineModel;
-        description: LineModel;
+        lineId: number;
+        lineNumber: number;
+        direction: number;
+        alternative: string;
+        description: string;
     }
     public stops: {
-        startingPoint: LocationModel;
-        destination: LocationModel;
+        startingPoint: string;
+        destination: string;
     }
-    public tripId: TripModel;
+    public tripId: number;
     public departureTime: string;
     public effectiveDepartureTime: string;
     public dayOfTheWeek: number;
-    public startingDate: Date;
+    public startingDate: string;
     public endingDate: string;
-    public sourceId: SourceModel;
+    public sourceId: string;
     public missionType: string;
     public affectedMission: number;
     public affectedMissionDirection: number;

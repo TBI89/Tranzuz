@@ -38,7 +38,7 @@ function Login(): JSX.Element {
                 <span className="Error">{formState.errors.password?.message}</span>
                 <br /><br />
 
-                <button>כניסה</button>
+                <button className="ButtonLogin">כניסה</button>
 
             </form>
 

@@ -1,9 +1,10 @@
 import "./Home.css";
+import homePageImage from "../../../Assets/Images/home-page-image.jpg";
 
 function Home(): JSX.Element {
     return (
         <div className="Home">
-			<h2>Home Page</h2>
+            <img src={homePageImage} />
         </div>
     );
 }

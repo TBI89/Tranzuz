@@ -1,3 +1,9 @@
+@font-face {
+    font-family: "header" ;
+    src: url("../../../Assets/Fonts/TiltNeon-Regular-VariableFont_XROT\,YROT.ttf");
+}
+
 .Header {
-	
+	font-family: "header";
+    font-size: x-large;
 }

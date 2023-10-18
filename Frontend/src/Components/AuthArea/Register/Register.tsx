@@ -48,7 +48,7 @@ function Register(): JSX.Element {
                 <span className="Error">{formState.errors.password?.message}</span>
                 <br /><br />
 
-                <button>הרשמה</button>
+                <button className="ButtonRegister">הרשמה</button>
                 
             </form>
 

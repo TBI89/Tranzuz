@@ -10,12 +10,13 @@ function MissionList(): JSX.Element {
     const [missions, setMissions] = useState<MissionModel[]>([]); // Manege missions local state.
     const navigate = useNavigate(); // use to redirect the user when needed.
 
+    // Fetch all the missions from the backend (once, when the component mounts:)
     useEffect(() => {
         missionsService.getAllMissions()
             .then(missions => setMissions(missions))
             .catch(err => {
                 notifyService.error(err);
-                if (err.response?.status === 401) navigate("/login");
+                if (err.response?.status === 401) navigate("/login"); // Navigate to login page if the user didn't identified.
             });
     }, []);
 
@@ -50,8 +51,26 @@ function MissionList(): JSX.Element {
 
                 <tbody>
                     {missions.map(m =>
-                        <tr>
-                            <td></td>
+                        <tr key={m._id}>
+                            <td>{m.lineData.lineId}</td>
+                            <td>{m.lineData.lineNumber}</td>
+                            <td>{m.lineData.direction}</td>
+                            <td>{m.lineData.alternative}</td>
+                            <td>{m.stops.startingPoint}</td>
+                            <td>{m.stops.destination}</td>
+                            <td>{m.lineData.description}</td>
+                            <td>{m.tripId}</td>
+                            <td>{m.departureTime}</td>
+                            <td>{m.effectiveDepartureTime}</td>
+                            <td>{m.dayOfTheWeek}</td>
+                            <td>{m.startingDate}</td>
+                            <td>{m.endingDate}</td>
+                            <td>{m.sourceId}</td>
+                            <td>{m.missionType}</td>
+                            <td>{m.affectedMission}</td>
+                            <td>{m.affectedMissionDescription}</td>
+                            <td>{m.affectedMissionAlternative}</td>
+                            <td>{m.affectedMissionDescription}</td>
                         </tr>
                     )}
                 </tbody>
