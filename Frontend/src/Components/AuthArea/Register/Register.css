@@ -11,13 +11,6 @@
     background-color: wheat
 }
 
-.Register>label,
-input {
-    font-size: large;
-    margin-top: 5px;
-    width: 175px;
-}
-
 .ButtonRegister {
     cursor: pointer;
     width: 55px;

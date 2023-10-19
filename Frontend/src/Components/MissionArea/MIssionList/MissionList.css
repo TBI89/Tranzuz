@@ -1,3 +1,18 @@
-.MissionList {
-	
+.MissionList>table, th, td {
+	border: 1px solid;
+    border-collapse: collapse;
+    margin: auto;
+    padding: 5px;
+}
+
+.MissionList>thead, th {
+    background-color: cadetblue;
+}
+
+.MissionList>tbody,tr:nth-child(even) {
+    background-color: darkgray;
+}
+
+.MissionList>tbody,tr:nth-child(odd) {
+    background-color:cornsilk;
 }
