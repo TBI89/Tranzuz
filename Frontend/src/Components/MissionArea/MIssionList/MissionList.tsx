@@ -4,8 +4,11 @@ import MissionModel from "../../../Models/MissionModel";
 import { useNavigate } from "react-router-dom";
 import missionsService from "../../../Services/MissionsService";
 import notifyService from "../../../Services/NotifyService";
+import useTitle from "../../../Utils/UseTitle";
 
 function MissionList(): JSX.Element {
+
+    useTitle("Tranzuz | Missions");
 
     const [missions, setMissions] = useState<MissionModel[]>([]); // Manege missions local state.
     const navigate = useNavigate(); // use to redirect the user when needed.

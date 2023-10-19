@@ -4,8 +4,11 @@ import { useNavigate } from "react-router-dom";
 import notifyService from "../../../Services/NotifyService";
 import authService from "../../../Services/AuthService";
 import CredentialsModel from "../../../Models/CredentialsModel";
+import useTitle from "../../../Utils/UseTitle";
 
 function Login(): JSX.Element {
+
+    useTitle("Tranzuz | Login");
 
     // Form state:
     const { register, handleSubmit, formState } = useForm<CredentialsModel>();

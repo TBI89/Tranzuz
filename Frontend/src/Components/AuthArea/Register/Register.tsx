@@ -4,8 +4,11 @@ import UserModel from "../../../Models/UserModel";
 import { useNavigate } from "react-router-dom";
 import notifyService from "../../../Services/NotifyService";
 import authService from "../../../Services/AuthService";
+import useTitle from "../../../Utils/UseTitle";
 
 function Register(): JSX.Element {
+
+    useTitle("Tranzuz | Register");
 
     // Form state:
     const { register, handleSubmit, formState } = useForm<UserModel>();
