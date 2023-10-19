@@ -15,4 +15,16 @@ router.get("/missions", verifyToken, async (request: Request, response: Response
     }
 });
 
+// GET http://localhost:4000/api/missions/:_id
+router.get("/missions/:_id", verifyToken, async (request: Request, response: Response, next: NextFunction) => {
+    try {
+        const _id = request.params._id;
+        const mission = await missionService.getSingleMissionById(_id);
+        response.json(mission);
+    }
+    catch (err: any) {
+        next(err);
+    }
+});
+
 export default router;

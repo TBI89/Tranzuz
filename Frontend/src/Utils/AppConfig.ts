@@ -1,7 +1,7 @@
 abstract class AppConfig {
-    public readonly registerUrl = this.baseUrl + "/api/register";
-    public readonly loginUrl = this.baseUrl + "/api/login";
-    public readonly missionsUrl = this.baseUrl + "/api/missions";
+    public readonly registerUrl = this.baseUrl + "/api/register/";
+    public readonly loginUrl = this.baseUrl + "/api/login/";
+    public readonly missionsUrl = this.baseUrl + "/api/missions/";
     public constructor(private baseUrl: string) { }
 }
 

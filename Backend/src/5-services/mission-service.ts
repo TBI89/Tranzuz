@@ -3,25 +3,33 @@ import { MissionModel } from "../3-models/mission-model";
 
 // Get all missions:
 function getAllMissions(): Promise<any[]> {
+
+    // Display all the items on the MissionModel array:
     return MissionModel.find()
-        .populate('tripIdVirtual', 'tripId') // Populate the 'tripId' virtual and select the 'tripId' field.
-        .populate('sourceIdVirtual', 'sourceName') // Populate the 'sourceId' virtual and select the 'sourceName' field.
+
+        // Populate the virtual fields:
+        .populate('tripIdVirtual', 'tripId')
+        .populate('sourceIdVirtual', 'sourceName')
         .populate({
-            path: 'startingPointVirtual', // Populate the 'startingPointVirtual' virtual.
-            select: 'locationName', // Select the 'locationName' field.
+            path: 'startingPointVirtual',
+            select: 'locationName',
             model: LocationModel
         })
         .populate({
-            path: 'destinationVirtual', // Populate the 'destinationVirtual' virtual.
-            select: 'locationName', // Select the 'locationName' field.
+            path: 'destinationVirtual',
+            select: 'locationName',
             model: LocationModel
         })
-        .populate('lineIdVirtual', 'lineId') // Populate the 'lineId' virtual and select the 'lineId' field.
-        .populate('lineNumberVirtual', 'lineNumber') // Populate the 'lineNumber' virtual and select the 'lineNumber' field.
-        .populate('lineDirectionVirtual', 'direction') // Populate the 'lineDirection' virtual and select the 'direction' field.
-        .populate('lineAlternativeVirtual', 'alternative') // Populate the 'lineAlternative' virtual and select the 'alternative' field.
-        .populate('lineDescriptionVirtual', 'description') // Populate the 'lineDescription' virtual and select the 'description' field.
+        .populate('lineIdVirtual', 'lineId')
+        .populate('lineNumberVirtual', 'lineNumber')
+        .populate('lineDirectionVirtual', 'direction')
+        .populate('lineAlternativeVirtual', 'alternative')
+        .populate('lineDescriptionVirtual', 'description')
+
+        // Execute query:
         .exec()
+
+        // Map all missions & convert them to objects:
         .then((missions: any[]) => {
             return missions.map(mission => {
                 return {
@@ -44,6 +52,59 @@ function getAllMissions(): Promise<any[]> {
         });
 }
 
+// Function to retrieve a single mission from the database:
+function getSingleMissionById(missionId: string): Promise<any | null> {
+
+    // Query the MissionModel to find a mission by its unique identifier and populate virtual fields:
+    return MissionModel.findOne({ _id: missionId })
+        
+        // Populate the virtual fields for easier access and readability:
+        .populate('tripIdVirtual', 'tripId')
+        .populate('sourceIdVirtual', 'sourceName')
+        .populate({
+            path: 'startingPointVirtual',
+            select: 'locationName',
+            model: LocationModel
+        })
+        .populate({
+            path: 'destinationVirtual',
+            select: 'locationName',
+            model: LocationModel
+        })
+        .populate('lineIdVirtual', 'lineId')
+        .populate('lineNumberVirtual', 'lineNumber')
+        .populate('lineDirectionVirtual', 'direction')
+        .populate('lineAlternativeVirtual', 'alternative')
+        .populate('lineDescriptionVirtual', 'description')
+
+        // Execute the query and handle the returned promise:
+        .exec()
+
+        // Transform the retrieved mission into the desired object format:
+        .then((mission: any | null) => {
+            if (mission) {
+                return {
+                    ...mission.toObject(), // Convert the mission to a plain JavaScript object
+                    tripId: mission.tripIdVirtual ? mission.tripIdVirtual.tripId : null,
+                    sourceId: mission.sourceIdVirtual ? mission.sourceIdVirtual.sourceName : null,
+                    stops: {
+                        startingPoint: mission.startingPointVirtual ? mission.startingPointVirtual.locationName : null,
+                        destination: mission.destinationVirtual ? mission.destinationVirtual.locationName : null
+                    },
+                    lineData: {
+                        lineId: mission.lineIdVirtual ? mission.lineIdVirtual.lineId : null,
+                        lineNumber: mission.lineNumberVirtual ? mission.lineNumberVirtual.lineNumber : null,
+                        direction: mission.lineDirectionVirtual ? mission.lineDirectionVirtual.direction : null,
+                        alternative: mission.lineAlternativeVirtual ? mission.lineAlternativeVirtual.alternative : null,
+                        description: mission.lineDescriptionVirtual ? mission.lineDescriptionVirtual.description : null
+                    }
+                };
+            }
+            return null; // Return null if the mission is not found
+        });
+}
+
 export default {
-    getAllMissions
+    getAllMissions,
+    getSingleMissionById
 };

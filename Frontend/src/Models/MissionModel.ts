@@ -2,7 +2,7 @@
 class MissionModel {
 
     // Model:
-    public _id: number;
+    public _id: string;
     public lineData: {
         lineId: number;
         lineNumber: number;
