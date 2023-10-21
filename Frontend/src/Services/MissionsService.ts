@@ -20,7 +20,6 @@ class MissionsService {
             const response = await axios.get<MissionModel>(appConfig.missionsUrl + _id);
             mission = response.data;
         }
-        console.log(mission);
         return mission;
     }
 }

@@ -1,3 +1,4 @@
+import { ResourceNotFoundError } from "../3-models/client-errors";
 import { LocationModel } from "../3-models/location-model";
 import { MissionModel } from "../3-models/mission-model";
 
@@ -57,7 +58,7 @@ function getSingleMissionById(missionId: string): Promise<any | null> {
 
     // Query the MissionModel to find a mission by its unique identifier and populate virtual fields:
     return MissionModel.findOne({ _id: missionId })
-        
+
         // Populate the virtual fields for easier access and readability:
         .populate('tripIdVirtual', 'tripId')
         .populate('sourceIdVirtual', 'sourceName')
@@ -104,7 +105,30 @@ function getSingleMissionById(missionId: string): Promise<any | null> {
         });
 }
 
+// Update mission by _id:
+async function updateMissionById(_id: string, propName: string, propValue: any): Promise<any | null> {
+
+    if (!_id) throw new ResourceNotFoundError(_id); // Check if the mission exist.
+    const updatedMission = await MissionModel.findByIdAndUpdate(
+        _id,
+        { [propName]: propValue }, // Dynamically change the "propName" value with "propValue" value.
+        { new: true }
+    )
+        .populate('tripIdVirtual', 'tripId')
+        .populate('sourceIdVirtual', 'sourceName')
+        .populate('startingPointVirtual', 'locationName')
+        .populate('destinationVirtual', 'locationName')
+        .populate('lineIdVirtual', 'lineId')
+        .populate('lineNumberVirtual', 'lineNumber')
+        .populate('lineDirectionVirtual', 'direction')
+        .populate('lineAlternativeVirtual', 'alternative')
+        .populate('lineDescriptionVirtual', 'description');
+
+    return updatedMission;
+}
+
 export default {
     getAllMissions,
-    getSingleMissionById
+    getSingleMissionById,
+    updateMissionById
 };

@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
-import "./MissionList.css";
+import { NavLink, useNavigate } from "react-router-dom";
 import MissionModel from "../../../Models/MissionModel";
-import { useNavigate } from "react-router-dom";
 import missionsService from "../../../Services/MissionsService";
 import notifyService from "../../../Services/NotifyService";
 import useTitle from "../../../Utils/UseTitle";
+import "./MissionList.css";
 
 function MissionList(): JSX.Element {
 
+    // Tab title:
     useTitle("Tranzuz | Missions");
 
     const [missions, setMissions] = useState<MissionModel[]>([]); // Manege missions local state.
@@ -49,6 +50,7 @@ function MissionList(): JSX.Element {
                         <th>כיוון קו מושפע</th>
                         <th>חלופת קו מושפע</th>
                         <th>תיאור קו מושפע</th>
+                        <th>אפשרויות</th>
                     </tr>
                 </thead>
 
@@ -74,6 +76,7 @@ function MissionList(): JSX.Element {
                             <td>{m.affectedMissionDescription}</td>
                             <td>{m.affectedMissionAlternative}</td>
                             <td>{m.affectedMissionDescription}</td>
+                            <td>{<NavLink to={`/missions/${m._id}`}>🔎</NavLink>}</td>
                         </tr>
                     )}
                 </tbody>
