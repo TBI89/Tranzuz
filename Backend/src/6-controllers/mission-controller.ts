@@ -2,6 +2,8 @@ import express, { Request, Response, NextFunction } from "express";
 import missionService from "../5-services/mission-service";
 import verifyToken from "../4-middleware/verify-token";
 import { ValidationError } from "../3-models/client-errors";
+import StatusCode from "../3-models/status-code";
+import { MissionModel } from "../3-models/mission-model";
 
 const router = express.Router();
 
@@ -36,11 +38,35 @@ router.patch("/missions/:_id", verifyToken, async (request: Request, response: R
         console.log("Mission ID: ", _id);
         console.log("Property to update: ", propName);
         console.log("Property new value: ", propValue);
-        console.log("request.body: ",request.body);
-        
+        console.log("request.body: ", request.body);
+
         if (!propName) throw new ValidationError("יש לעדכן את השדה הנבחר.");
         const updatedMission = await missionService.updateMissionById(_id, propName, propValue);
         response.json(updatedMission);
+    }
+    catch (err: any) {
+        next(err);
+    }
+});
+
+// DELETE http://localhost:4000/api/missions/:_id
+router.delete("/missions/:_id", verifyToken, async (request: Request, response: Response, next: NextFunction) => {
+    try {
+        const _id = request.params._id;
+        await missionService.deleteMission(_id);
+        response.sendStatus(StatusCode.NoContent);
+    }
+    catch (err: any) {
+        next(err);
+    }
+});
+
+// POST http://localhost:4000/api/missions/:_id
+router.post("/missions/:_id", verifyToken, async (request: Request, response: Response, next: NextFunction) => {
+    try {
+       const existingMission = request.params._id;
+       const duplicatedMission = await missionService.duplicateMission(existingMission);
+       response.status(StatusCode.Created).json(duplicatedMission);
     }
     catch (err: any) {
         next(err);

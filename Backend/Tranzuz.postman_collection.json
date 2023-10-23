@@ -17,7 +17,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1MmU0MTczZDhiNWQ5YjQ3MzZlZjQwNCIsImZpcnN0TmFtZSI6Iteq15XXnteoIiwibGFzdE5hbWUiOiLXkdefLdeZ16nXqNeQ15wiLCJwYXNzd29yZCI6IjM2YmRiYmIxOGFhMGM5MTQ4MDhkOWQyM2IyMWViOTk2NTRlNDQ2YTBkNjExMWMxNWU3YTFmNjVjNDE3MTkwODAzM2Q2NjRjNmFkNWRlMTc1YmZiNGJmZjkwNTJhZTIwZGI2ODA3ZDkyZDUzMzA4YjU2YmVhZjYyMDNlNjMxN2M4IiwiZW1haWwiOiJ0b21lcmJlbjg5QGdtYWlsLmNvbSJ9LCJpYXQiOjE2OTc2NDQ3MDEsImV4cCI6MTY5NzY1NTUwMX0.1oCpX1UHuOWaxiCmQqj4gGJ2lJNfXoYSg4B1DJToi_c",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1MmU0MTczZDhiNWQ5YjQ3MzZlZjQwNCIsImZpcnN0TmFtZSI6Iteq15XXnteoIiwibGFzdE5hbWUiOiLXkdefLdeZ16nXqNeQ15wiLCJwYXNzd29yZCI6IjM2YmRiYmIxOGFhMGM5MTQ4MDhkOWQyM2IyMWViOTk2NTRlNDQ2YTBkNjExMWMxNWU3YTFmNjVjNDE3MTkwODAzM2Q2NjRjNmFkNWRlMTc1YmZiNGJmZjkwNTJhZTIwZGI2ODA3ZDkyZDUzMzA4YjU2YmVhZjYyMDNlNjMxN2M4IiwiZW1haWwiOiJ0b21lcmJlbjg5QGdtYWlsLmNvbSJ9LCJpYXQiOjE2OTgwNzgxOTgsImV4cCI6MTY5ODA4ODk5OH0.OD2WIh0R1XnBWs_ZLKf43ZLyADg8zzusa8osOKMKefA",
 									"type": "string"
 								}
 							]
@@ -47,13 +47,133 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1MmU0MTczZDhiNWQ5YjQ3MzZlZjQwNCIsImZpcnN0TmFtZSI6Iteq15XXnteoIiwibGFzdE5hbWUiOiLXkdefLdeZ16nXqNeQ15wiLCJwYXNzd29yZCI6IjM2YmRiYmIxOGFhMGM5MTQ4MDhkOWQyM2IyMWViOTk2NTRlNDQ2YTBkNjExMWMxNWU3YTFmNjVjNDE3MTkwODAzM2Q2NjRjNmFkNWRlMTc1YmZiNGJmZjkwNTJhZTIwZGI2ODA3ZDkyZDUzMzA4YjU2YmVhZjYyMDNlNjMxN2M4IiwiZW1haWwiOiJ0b21lcmJlbjg5QGdtYWlsLmNvbSJ9LCJpYXQiOjE2OTc3MzAxMTEsImV4cCI6MTY5Nzc0MDkxMX0.g2cBWYjCpSaZM1_VU7p76FbukA43GQskb_pviskzrqs",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1MmU0MTczZDhiNWQ5YjQ3MzZlZjQwNCIsImZpcnN0TmFtZSI6Iteq15XXnteoIiwibGFzdE5hbWUiOiLXkdefLdeZ16nXqNeQ15wiLCJwYXNzd29yZCI6IjM2YmRiYmIxOGFhMGM5MTQ4MDhkOWQyM2IyMWViOTk2NTRlNDQ2YTBkNjExMWMxNWU3YTFmNjVjNDE3MTkwODAzM2Q2NjRjNmFkNWRlMTc1YmZiNGJmZjkwNTJhZTIwZGI2ODA3ZDkyZDUzMzA4YjU2YmVhZjYyMDNlNjMxN2M4IiwiZW1haWwiOiJ0b21lcmJlbjg5QGdtYWlsLmNvbSJ9LCJpYXQiOjE2OTgwNzgxOTgsImV4cCI6MTY5ODA4ODk5OH0.OD2WIh0R1XnBWs_ZLKf43ZLyADg8zzusa8osOKMKefA",
 									"type": "string"
 								}
 							]
 						},
 						"method": "GET",
 						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/api/missions/652ec9ee1044175cf02b2917",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"missions",
+								"652ec9ee1044175cf02b2917"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update SIngle Mission By _id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1MmU0MTczZDhiNWQ5YjQ3MzZlZjQwNCIsImZpcnN0TmFtZSI6Iteq15XXnteoIiwibGFzdE5hbWUiOiLXkdefLdeZ16nXqNeQ15wiLCJwYXNzd29yZCI6IjM2YmRiYmIxOGFhMGM5MTQ4MDhkOWQyM2IyMWViOTk2NTRlNDQ2YTBkNjExMWMxNWU3YTFmNjVjNDE3MTkwODAzM2Q2NjRjNmFkNWRlMTc1YmZiNGJmZjkwNTJhZTIwZGI2ODA3ZDkyZDUzMzA4YjU2YmVhZjYyMDNlNjMxN2M4IiwiZW1haWwiOiJ0b21lcmJlbjg5QGdtYWlsLmNvbSJ9LCJpYXQiOjE2OTgwNzgxOTgsImV4cCI6MTY5ODA4ODk5OH0.OD2WIh0R1XnBWs_ZLKf43ZLyADg8zzusa8osOKMKefA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"propName\": \"effectiveDepartureTime\",\r\n    \"propValue\": \"06:12\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/missions/652ec9ee1044175cf02b2917",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"missions",
+								"652ec9ee1044175cf02b2917"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Mission",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1MmU0MTczZDhiNWQ5YjQ3MzZlZjQwNCIsImZpcnN0TmFtZSI6Iteq15XXnteoIiwibGFzdE5hbWUiOiLXkdefLdeZ16nXqNeQ15wiLCJwYXNzd29yZCI6IjM2YmRiYmIxOGFhMGM5MTQ4MDhkOWQyM2IyMWViOTk2NTRlNDQ2YTBkNjExMWMxNWU3YTFmNjVjNDE3MTkwODAzM2Q2NjRjNmFkNWRlMTc1YmZiNGJmZjkwNTJhZTIwZGI2ODA3ZDkyZDUzMzA4YjU2YmVhZjYyMDNlNjMxN2M4IiwiZW1haWwiOiJ0b21lcmJlbjg5QGdtYWlsLmNvbSJ9LCJpYXQiOjE2OTgwNzgxOTgsImV4cCI6MTY5ODA4ODk5OH0.OD2WIh0R1XnBWs_ZLKf43ZLyADg8zzusa8osOKMKefA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"propName\": \"effectiveDepartureTime\",\r\n    \"propValue\": \"06:11\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/missions/65369eb135206a754b4616f2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"missions",
+								"65369eb135206a754b4616f2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Duplicate Mission",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1MmU0MTczZDhiNWQ5YjQ3MzZlZjQwNCIsImZpcnN0TmFtZSI6Iteq15XXnteoIiwibGFzdE5hbWUiOiLXkdefLdeZ16nXqNeQ15wiLCJwYXNzd29yZCI6IjM2YmRiYmIxOGFhMGM5MTQ4MDhkOWQyM2IyMWViOTk2NTRlNDQ2YTBkNjExMWMxNWU3YTFmNjVjNDE3MTkwODAzM2Q2NjRjNmFkNWRlMTc1YmZiNGJmZjkwNTJhZTIwZGI2ODA3ZDkyZDUzMzA4YjU2YmVhZjYyMDNlNjMxN2M4IiwiZW1haWwiOiJ0b21lcmJlbjg5QGdtYWlsLmNvbSJ9LCJpYXQiOjE2OTgwNzgxOTgsImV4cCI6MTY5ODA4ODk5OH0.OD2WIh0R1XnBWs_ZLKf43ZLyADg8zzusa8osOKMKefA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "http://localhost:4000/api/missions/652ec9ee1044175cf02b2917",
 							"protocol": "http",

@@ -6,7 +6,16 @@ import { LineModel } from "./line-model";
 
 // 1. Interface:
 export interface IMissionModel extends Document {
-    lineData:  { // lines collection.
+    lineDescriptionVirtual: any;
+    lineAlternativeVirtual: any;
+    lineDirectionVirtual: any;
+    lineNumberVirtual: any;
+    lineIdVirtual: any;
+    destinationVirtual: any;
+    startingPointVirtual: any;
+    sourceIdVirtual: any;
+    tripIdVirtual: any;
+    lineData: { // lines collection.
         lineId: ObjectId;
         lineNumber: ObjectId;
         direction: ObjectId;
@@ -18,11 +27,11 @@ export interface IMissionModel extends Document {
         destination: ObjectId;
     }
     tripId: ObjectId; // trips collection (tripId).
-    departureTime: string; 
+    departureTime: string;
     effectiveDepartureTime: string; // localTimeString.
-    dayOfTheWeek: number; 
-    startingDate: string; 
-    endingDate: string; 
+    dayOfTheWeek: number;
+    startingDate: string;
+    endingDate: string;
     sourceId: ObjectId; // source collection (sourceName).
     missionType: string;
     affectedMission: number;
@@ -122,37 +131,37 @@ export const MissionSchema = new Schema<IMissionModel>({
 
 // 3. Virtuals:
 MissionSchema.virtual("lineIdVirtual", {
-    ref: LineModel, 
-    localField: "lineData.lineId", 
-    foreignField: "_id", 
-    justOne: true,
+    ref: LineModel,
+    localField: "lineData.lineId",
+    foreignField: "_id",
+    justOne: true
 });
 
 MissionSchema.virtual("lineNumberVirtual", {
-    ref: LineModel, 
-    localField: "lineData.lineNumber", 
-    foreignField: "_id", 
+    ref: LineModel,
+    localField: "lineData.lineNumber",
+    foreignField: "_id",
     justOne: true,
 });
 
 MissionSchema.virtual("lineDirectionVirtual", {
-    ref: LineModel, 
-    localField: "lineData.direction", 
-    foreignField: "_id", 
+    ref: LineModel,
+    localField: "lineData.direction",
+    foreignField: "_id",
     justOne: true,
 });
 
 MissionSchema.virtual("lineAlternativeVirtual", {
-    ref: LineModel, 
-    localField: "lineData.alternative", 
-    foreignField: "_id", 
+    ref: LineModel,
+    localField: "lineData.alternative",
+    foreignField: "_id",
     justOne: true,
 });
 
 MissionSchema.virtual("lineDescriptionVirtual", {
-    ref: LineModel, 
-    localField: "lineData.description", 
-    foreignField: "_id", 
+    ref: LineModel,
+    localField: "lineData.description",
+    foreignField: "_id",
     justOne: true,
 });
 
