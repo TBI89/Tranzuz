@@ -56,10 +56,10 @@ function getAllMissions(): Promise<IMissionModel[]> {
 }
 
 // Function to retrieve a single mission from the database:
-function getSingleMissionById(missionId: string): Promise<IMissionModel | null> {
+function getSingleMissionById(_id: string): Promise<IMissionModel | null> {
 
     // Query the MissionModel to find a mission by its unique identifier and populate virtual fields:
-    return MissionModel.findOne({ _id: missionId })
+    return MissionModel.findOne({ _id })
 
         // Populate the virtual fields for easier access and readability:
         .populate('tripIdVirtual', 'tripId')
@@ -103,7 +103,9 @@ function getSingleMissionById(missionId: string): Promise<IMissionModel | null> 
                     }
                 };
             }
-            return null; // Return null if the mission is not found
+            else {
+                throw new ResourceNotFoundError(_id);
+            }
         });
 }
 

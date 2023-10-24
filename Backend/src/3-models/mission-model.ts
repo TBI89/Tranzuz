@@ -6,15 +6,6 @@ import { LineModel } from "./line-model";
 
 // 1. Interface:
 export interface IMissionModel extends Document {
-    lineDescriptionVirtual: any;
-    lineAlternativeVirtual: any;
-    lineDirectionVirtual: any;
-    lineNumberVirtual: any;
-    lineIdVirtual: any;
-    destinationVirtual: any;
-    startingPointVirtual: any;
-    sourceIdVirtual: any;
-    tripIdVirtual: any;
     lineData: { // lines collection.
         lineId: ObjectId;
         lineNumber: ObjectId;
@@ -28,7 +19,7 @@ export interface IMissionModel extends Document {
     }
     tripId: ObjectId; // trips collection (tripId).
     departureTime: string;
-    effectiveDepartureTime: string; // localTimeString.
+    effectiveDepartureTime: string; 
     dayOfTheWeek: number;
     startingDate: string;
     endingDate: string;
