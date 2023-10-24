@@ -8,7 +8,10 @@ export class MissionState {
 
 // 2. Action types:
 export enum MissionActionType {
-    SetMission = "SetMission"
+    SetMission = "SetMission",
+    DuplicateMission = "DuplicateMission",
+    UpdateMission = "UpdateMission",
+    DeleteMission = "DeleteMission"
 }
 
 // 3. Action object:
@@ -27,6 +30,17 @@ export function missionReducer(currentState = new MissionState(), action: Missio
     switch (action.type) {
         case MissionActionType.SetMission:
             newState.missions = action.payload;
+            break;
+        case MissionActionType.DuplicateMission:
+            newState.missions.push(action.payload);
+            break;
+        case MissionActionType.UpdateMission:
+            const indexToUpdate = newState.missions.findIndex(m => m._id === action.payload._id);
+            if (indexToUpdate >= 0) newState.missions[indexToUpdate] = action.payload;
+            break;
+        case MissionActionType.DeleteMission:
+            const indexToDelete = newState.missions.findIndex(m => m._id === action.payload);
+            if (indexToDelete >= 0) newState.missions.splice(indexToDelete, 1);
             break;
     }
     return newState;

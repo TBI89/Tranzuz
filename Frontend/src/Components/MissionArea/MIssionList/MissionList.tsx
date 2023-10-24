@@ -11,7 +11,13 @@ function MissionList(): JSX.Element {
     // Tab title:
     useTitle("Tranzuz | Missions");
 
-    const [missions, setMissions] = useState<MissionModel[]>([]); // Manege missions local state.
+    // Manege missions local state:
+    const [missions, setMissions] = useState<MissionModel[]>([]);
+    const [editMissionId, setEditMissionId] = useState<string>(null); // Enable editing fields.
+    const [editedValues, setEditedValues] = useState<Record<string, string>>({
+        departureTime: ""
+    });
+
     const navigate = useNavigate(); // use to redirect the user when needed.
 
     // Fetch all the missions from the backend (once, when the component mounts:)
@@ -23,6 +29,49 @@ function MissionList(): JSX.Element {
                 if (err.response?.status === 401) navigate("/login"); // Navigate to login page if the user didn't identified.
             });
     }, []);
+
+    // Fetch the _id of the mission when user clicks the related column:
+    function handleEditing(missionId: string) {
+        if (editMissionId === missionId) {
+            // Save changes and exit edit mode.
+            handleSaving();
+            setEditMissionId(null);
+        } else {
+            // Enter edit mode for the selected mission.
+            const missionToEdit = missions.find((m) => m._id === missionId);
+            if (missionToEdit) {
+                setEditMissionId(missionId);
+                setEditedValues({ departureTime: missionToEdit.departureTime });
+            }
+        }
+    }
+
+    // Save changes & update the column:
+    async function handleSaving() {
+        try {
+            if (editMissionId) { // Check if a mission being edited.
+                const missionToEdit = missions.find(m => m._id === editMissionId); // Find the mission.
+                const editedMission: MissionModel = { // Create new object.
+                    ...missionToEdit, // Copy the existing mission.
+                    departureTime: editedValues.departureTime // Change the relevant value.
+                }
+
+                // Send PATCH request to the server to update the mission:
+                await missionsService.updateMissionById(editedMission);
+
+                // Update local state:
+                setMissions(prevMissions =>
+                    prevMissions.map(m => m._id === editMissionId ? editedMission : m));
+            }
+        }
+        catch (err: any) {
+            notifyService.error("תקלה בזמן העדכון. יש לנסות שוב מאוחר יותר.")
+        }
+        finally { // Reset editing filed state.
+            setEditMissionId(null);
+            setEditedValues({ departureTime: "" });
+        }
+    }
 
     return (
         <div className="MissionList">
@@ -50,7 +99,7 @@ function MissionList(): JSX.Element {
                         <th>כיוון קו מושפע</th>
                         <th>חלופת קו מושפע</th>
                         <th>תיאור קו מושפע</th>
-                        <th>אפשרויות</th>
+                        <th>פרטים</th>
                     </tr>
                 </thead>
 
@@ -65,7 +114,29 @@ function MissionList(): JSX.Element {
                             <td>{m.stops.destination}</td>
                             <td>{m.lineData.description}</td>
                             <td>{m.tripId}</td>
-                            <td>{m.departureTime}</td>
+                            <td
+                                onClick={() => handleEditing(m._id)}
+                                style={{ cursor: "pointer", padding: "5px" }}
+                            >
+                                {editMissionId === m._id ? (
+                                    // If in edit mode, show an input field and Save button.
+                                    <>
+                                        <input
+                                            type="text"
+                                            value={editedValues.departureTime}
+                                            onChange={(e) =>
+                                                setEditedValues({
+                                                    departureTime: e.target.value
+                                                })
+                                            }
+                                        />
+                                        <button onClick={handleSaving}>Save</button>
+                                    </>
+                                ) : (
+                                    // If not in edit mode, display the departureTime value.
+                                    m.departureTime
+                                )}
+                            </td>
                             <td>{m.effectiveDepartureTime}</td>
                             <td>{m.dayOfTheWeek}</td>
                             <td>{m.startingDate}</td>
