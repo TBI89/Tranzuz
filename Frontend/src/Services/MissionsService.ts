@@ -43,11 +43,10 @@ class MissionsService {
     }
 
     // Duplicate mission by _id:
-    public async duplicateMission(_id: string): Promise<void> {
+    public async duplicateMission(_id: string): Promise<MissionModel> {
         const response = await axios.post(appConfig.missionsUrl + _id);
         const duplicatedMission = response.data;
-        const action: MissionActionObject = { type: MissionActionType.DuplicateMission, payload: duplicatedMission };
-        missionStore.dispatch(action);
+      return duplicatedMission;
     }
 
 }

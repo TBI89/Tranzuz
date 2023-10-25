@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import MissionModel from "../../../Models/MissionModel";
 import missionsService from "../../../Services/MissionsService";
 import notifyService from "../../../Services/NotifyService";
 import useTitle from "../../../Utils/UseTitle";
 import "./MissionList.css";
+import { MissionActionObject, MissionActionType, missionStore } from "../../../Redux/MissionState";
 
 function MissionList(): JSX.Element {
 
     // Tab title:
     useTitle("Tranzuz | Missions");
 
-    // Manege missions local state:
     const [missions, setMissions] = useState<MissionModel[]>([]);
     const [editMissionId, setEditMissionId] = useState<string>(null); // Enable editing fields.
     const [editedValues, setEditedValues] = useState<Record<string, string>>({
@@ -28,7 +28,7 @@ function MissionList(): JSX.Element {
                 notifyService.error(err);
                 if (err.response?.status === 401) navigate("/login"); // Navigate to login page if the user didn't identified.
             });
-    }, []);
+    }, [navigate]);
 
     // Fetch the _id of the mission when user clicks the related column:
     function handleEditing(missionId: string) {
@@ -67,10 +67,43 @@ function MissionList(): JSX.Element {
             }
         } catch (err: any) {
             notifyService.error("תקלה בזמן העדכון. יש לנסות שוב מאוחר יותר.");
+            console.log(err);
         } finally {
             // Reset editing filed state.
             setEditMissionId(null);
             setEditedValues({ departureTime: "" });
+        }
+    }
+
+    // Remove column:
+    async function deleteMission(_id: string): Promise<void> {
+        try {
+            const sure = window.confirm("האם להסיר את הרשומה?");
+            if (!sure) return;
+            await missionsService.deleteMission(_id);
+            setMissions(prevMissions => prevMissions.filter(pm => pm._id !== _id));
+            notifyService.success("הרשומה הוסרה בהצלחה!");
+        }
+        catch (err: any) {
+            notifyService.error("תקלה בביצוע המחיקה. יש לנסות שוב מאוחר יותר.");
+            console.log(err);
+        }
+    }
+
+    // Duplicate column:
+    async function duplicateMission(_id: string): Promise<void> {
+        try {
+            const sure = window.confirm("האם לשכפל את הרשומה?");
+            if (!sure) return;
+            const duplicatedMission = await missionsService.duplicateMission(_id);
+            const action: MissionActionObject = { type: MissionActionType.DuplicateMission, payload: duplicatedMission };
+            missionStore.dispatch(action);
+            notifyService.success("הרשומה שוכפלה בהצלחה!");
+            setMissions(prevMissions => [...prevMissions, duplicatedMission]);
+        }
+        catch (err: any) {
+            notifyService.error("תקלה בביצוע השכפול. יש לנסות שוב מאוחר יותר.");
+            console.log(err);
         }
     }
 
@@ -81,6 +114,9 @@ function MissionList(): JSX.Element {
 
                 <thead>
                     <tr>
+                        <th>פרטים</th>
+                        <th>מחיקה</th>
+                        <th>שכפול</th>
                         <th>מזהה קו</th>
                         <th>מספר קו</th>
                         <th>כיוון</th>
@@ -100,13 +136,15 @@ function MissionList(): JSX.Element {
                         <th>כיוון קו מושפע</th>
                         <th>חלופת קו מושפע</th>
                         <th>תיאור קו מושפע</th>
-                        <th>פרטים</th>
                     </tr>
                 </thead>
 
                 <tbody>
                     {missions.map(m =>
                         <tr key={m._id}>
+                            <td>{<NavLink to={`/missions/${m._id}`}>🔎</NavLink>}</td>
+                            <td>{<button onClick={() => deleteMission(m._id)}>❌</button>}</td>
+                            <td>{<button onClick={() => duplicateMission(m._id)}>➕</button>}</td>
                             <td>{m.lineData.lineId}</td>
                             <td>{m.lineData.lineNumber}</td>
                             <td>{m.lineData.direction}</td>
@@ -125,7 +163,7 @@ function MissionList(): JSX.Element {
                                         <input
                                             type="text"
                                             value={editedValues.departureTime}
-                                            onChange={(e) =>
+                                            onChange={e =>
                                                 setEditedValues({
                                                     departureTime: e.target.value
                                                 })
@@ -148,7 +186,6 @@ function MissionList(): JSX.Element {
                             <td>{m.affectedMissionDescription}</td>
                             <td>{m.affectedMissionAlternative}</td>
                             <td>{m.affectedMissionDescription}</td>
-                            <td>{<NavLink to={`/missions/${m._id}`}>🔎</NavLink>}</td>
                         </tr>
                     )}
                 </tbody>
