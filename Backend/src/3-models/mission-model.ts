@@ -19,7 +19,7 @@ export interface IMissionModel extends Document {
     }
     tripId: ObjectId; // trips collection (tripId).
     departureTime: string;
-    effectiveDepartureTime: string; 
+    effectiveDepartureTime: string;
     dayOfTheWeek: number;
     startingDate: string;
     endingDate: string;
@@ -75,7 +75,8 @@ export const MissionSchema = new Schema<IMissionModel>({
     departureTime: {
         type: String,
         required: [true, "יש להזין שעת יציאה."]
-    },
+    }
+    ,
     effectiveDepartureTime: {
         type: String,
         required: [true, "יש להזין שעת יציאה אפקטיבית."]

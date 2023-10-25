@@ -1,11 +1,15 @@
+import DeleteIcon from '@mui/icons-material/Delete';
+import InfoIcon from '@mui/icons-material/Info';
+import EditIcon from '@mui/icons-material/Edit';
+import ControlPointDuplicateIcon from '@mui/icons-material/ControlPointDuplicate';
 import { useEffect, useState } from "react";
-import { NavLink, useNavigate, useParams } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import MissionModel from "../../../Models/MissionModel";
+import { MissionActionObject, MissionActionType, missionStore } from "../../../Redux/MissionState";
 import missionsService from "../../../Services/MissionsService";
 import notifyService from "../../../Services/NotifyService";
 import useTitle from "../../../Utils/UseTitle";
 import "./MissionList.css";
-import { MissionActionObject, MissionActionType, missionStore } from "../../../Redux/MissionState";
 
 function MissionList(): JSX.Element {
 
@@ -125,7 +129,7 @@ function MissionList(): JSX.Element {
                         <th>יעד</th>
                         <th>תיאור</th>
                         <th>מזהה נסיעה</th>
-                        <th>זמן יציאה</th>
+                        <th>זמן יציאה<EditIcon /></th>
                         <th>זמן יציאה אפקטיבי</th>
                         <th>יום בשבוע</th>
                         <th>מתאריך</th>
@@ -142,9 +146,9 @@ function MissionList(): JSX.Element {
                 <tbody>
                     {missions.map(m =>
                         <tr key={m._id}>
-                            <td>{<NavLink to={`/missions/${m._id}`}>🔎</NavLink>}</td>
-                            <td>{<button onClick={() => deleteMission(m._id)}>❌</button>}</td>
-                            <td>{<button onClick={() => duplicateMission(m._id)}>➕</button>}</td>
+                            <td>{<NavLink to={`/missions/${m._id}`}><InfoIcon /></NavLink>}</td>
+                            <td>{<button onClick={() => deleteMission(m._id)}><DeleteIcon /></button>}</td>
+                            <td>{<button onClick={() => duplicateMission(m._id)}><ControlPointDuplicateIcon /></button>}</td>
                             <td>{m.lineData.lineId}</td>
                             <td>{m.lineData.lineNumber}</td>
                             <td>{m.lineData.direction}</td>
@@ -169,7 +173,7 @@ function MissionList(): JSX.Element {
                                                 })
                                             }
                                         />
-                                        <button onClick={handleSaving}>Save</button>
+                                        <button className="btn btn-success" onClick={handleSaving}>שמירה</button>
                                     </>
                                 ) : (
                                     // If not in edit mode, display the departureTime value.

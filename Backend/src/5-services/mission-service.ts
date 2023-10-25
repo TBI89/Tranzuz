@@ -110,8 +110,7 @@ function getSingleMissionById(_id: string): Promise<IMissionModel | null> {
 }
 
 // Update mission by _id:
-async function updateMissionById(_id: string, propName: string, propValue: any): Promise<IMissionModel | null> {
-    if (!_id) throw new ResourceNotFoundError(_id); // Check if the mission exists.
+async function updateMissionById(_id: string, propName: string, propValue: any): Promise<IMissionModel> {
 
     const updatedMission = await MissionModel.findByIdAndUpdate(
         _id,
@@ -141,8 +140,6 @@ async function updateMissionById(_id: string, propName: string, propValue: any):
         .populate('lineAlternativeVirtual', 'alternative')
         .populate('lineDescriptionVirtual', 'description')
         .exec();
-
-    if (!updatedMission) throw new ValidationError("יש לעדכן את השדה הנבחר");
 
     // Convert the updated mission to a plain JavaScript object
     const plainUpdatedMission = updatedMission.toObject();

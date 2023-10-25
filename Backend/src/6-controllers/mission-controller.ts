@@ -1,7 +1,7 @@
 import express, { Request, Response, NextFunction } from "express";
 import missionService from "../5-services/mission-service";
 import verifyToken from "../4-middleware/verify-token";
-import { ValidationError } from "../3-models/client-errors";
+import { ResourceNotFoundError, ValidationError } from "../3-models/client-errors";
 import StatusCode from "../3-models/status-code";
 import { MissionModel } from "../3-models/mission-model";
 
@@ -59,9 +59,9 @@ router.delete("/missions/:_id", verifyToken, async (request: Request, response: 
 // POST http://localhost:4000/api/missions/:_id
 router.post("/missions/:_id", verifyToken, async (request: Request, response: Response, next: NextFunction) => {
     try {
-       const existingMission = request.params._id;
-       const duplicatedMission = await missionService.duplicateMission(existingMission);
-       response.status(StatusCode.Created).json(duplicatedMission);
+        const existingMission = request.params._id;
+        const duplicatedMission = await missionService.duplicateMission(existingMission);
+        response.status(StatusCode.Created).json(duplicatedMission);
     }
     catch (err: any) {
         next(err);
