@@ -38,7 +38,7 @@ function MissionList(): JSX.Element {
             setEditMissionId(null);
         } else {
             // Enter edit mode for the selected mission.
-            const missionToEdit = missions.find((m) => m._id === missionId);
+            const missionToEdit = missions.find(m => m._id === missionId);
             if (missionToEdit) {
                 setEditMissionId(missionId);
                 setEditedValues({ departureTime: missionToEdit.departureTime });
@@ -49,25 +49,26 @@ function MissionList(): JSX.Element {
     // Save changes & update the column:
     async function handleSaving() {
         try {
-            if (editMissionId) { // Check if a mission being edited.
-                const missionToEdit = missions.find(m => m._id === editMissionId); // Find the mission.
-                const editedMission: MissionModel = { // Create new object.
-                    ...missionToEdit, // Copy the existing mission.
-                    departureTime: editedValues.departureTime // Change the relevant value.
+            if (editMissionId) {
+                const missionToEdit = missions.find(m => m._id === editMissionId);
+                if (missionToEdit) {
+                    const editedMission: MissionModel = {
+                        ...missionToEdit,
+                        departureTime: editedValues.departureTime
+                    };
+                    // Send PATCH request to the server to update the mission:
+                    await missionsService.updateMissionById(editMissionId, "departureTime", editedValues.departureTime);
+                    // Update local state:
+                    setMissions(prevMissions =>
+                        prevMissions.map(m => (m._id === editMissionId ? editedMission : m))
+                    );
+                    notifyService.success("המשימה עודכנה בהצלחה");
                 }
-
-                // Send PATCH request to the server to update the mission:
-                await missionsService.updateMissionById(editedMission);
-
-                // Update local state:
-                setMissions(prevMissions =>
-                    prevMissions.map(m => m._id === editMissionId ? editedMission : m));
             }
-        }
-        catch (err: any) {
-            notifyService.error("תקלה בזמן העדכון. יש לנסות שוב מאוחר יותר.")
-        }
-        finally { // Reset editing filed state.
+        } catch (err: any) {
+            notifyService.error("תקלה בזמן העדכון. יש לנסות שוב מאוחר יותר.");
+        } finally {
+            // Reset editing filed state.
             setEditMissionId(null);
             setEditedValues({ departureTime: "" });
         }
@@ -115,7 +116,7 @@ function MissionList(): JSX.Element {
                             <td>{m.lineData.description}</td>
                             <td>{m.tripId}</td>
                             <td
-                                onClick={() => handleEditing(m._id)}
+                                onDoubleClick={() => handleEditing(m._id)}
                                 style={{ cursor: "pointer", padding: "5px" }}
                             >
                                 {editMissionId === m._id ? (

@@ -35,11 +35,6 @@ router.patch("/missions/:_id", verifyToken, async (request: Request, response: R
     try {
         const _id = request.params._id;
         const { propName, propValue } = request.body;
-        console.log("Mission ID: ", _id);
-        console.log("Property to update: ", propName);
-        console.log("Property new value: ", propValue);
-        console.log("request.body: ", request.body);
-
         if (!propName) throw new ValidationError("יש לעדכן את השדה הנבחר.");
         const updatedMission = await missionService.updateMissionById(_id, propName, propValue);
         response.json(updatedMission);

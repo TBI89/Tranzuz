@@ -23,11 +23,15 @@ class MissionsService {
         return mission;
     }
 
-    // Go to the backend, add mission _id to request, extract the updated obj & update global state:
-    public async updateMissionById(mission: MissionModel): Promise<void> {
-        const response = await axios.patch<MissionModel>(appConfig.missionsUrl + mission._id, mission);
+    // Update specific mission prop:
+    public async updateMissionById(_id: string, propName: string, propValue: any): Promise<void> {
+        const requestBody = {
+            propName: propName,
+            propValue: propValue
+        };
+        const response = await axios.patch<MissionModel>(appConfig.missionsUrl + _id, requestBody);
         const updatedMission = response.data;
-        const action: MissionActionObject = { type: MissionActionType.UpdateMission, payload: updatedMission };
+        const action: MissionActionObject = {type: MissionActionType.UpdateMission, payload: updatedMission};
         missionStore.dispatch(action);
     }
 
