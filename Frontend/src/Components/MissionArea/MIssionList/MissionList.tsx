@@ -112,12 +112,13 @@ function MissionList(): JSX.Element {
     }
 
     return (
+
         <div className="MissionList">
 
-            <table>
+            <table className='table table-sm  table-warning table-hover'>
 
                 <thead>
-                    <tr>
+                    <tr className='table table-info'>
                         <th>פרטים</th>
                         <th>מחיקה</th>
                         <th>שכפול</th>
@@ -164,7 +165,7 @@ function MissionList(): JSX.Element {
                                 {editMissionId === m._id ? (
                                     // If in edit mode, show an input field and Save button.
                                     <>
-                                        <input
+                                        <input className='EditInputBox'
                                             type="text"
                                             value={editedValues.departureTime}
                                             onChange={e =>

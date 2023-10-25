@@ -31,17 +31,15 @@ function Login(): JSX.Element {
 
             <form onSubmit={handleSubmit(send)}>
 
-                <label>דוא"ל</label>
-                <input type="email" {...register("email", CredentialsModel.emailValidation)} />
+                <input type="email" className="form-control" placeholder="מייל" {...register("email", CredentialsModel.emailValidation)} />
                 <span className="Error">{formState.errors.email?.message}</span>
                 <br /><br />
 
-                <label>סיסמא</label>
-                <input type="password" {...register("password", CredentialsModel.passwordValidation)} />
+                <input type="password" className="form-control" placeholder="סיסמא" {...register("password", CredentialsModel.passwordValidation)} />
                 <span className="Error">{formState.errors.password?.message}</span>
                 <br /><br />
 
-                <button className="ButtonLogin">כניסה</button>
+                <button className="btn btn-primary">כניסה</button>
 
             </form>
 

@@ -31,27 +31,23 @@ function Register(): JSX.Element {
 
             <form onSubmit={handleSubmit(send)}>
 
-                <label>שם פרטי</label>
-                <input type="text" {...register("firstName", UserModel.firstNameValidation)} />
+                <input type="text" className="form-control" placeholder="שם פרטי" {...register("firstName", UserModel.firstNameValidation)} />
                 <span className="Error">{formState.errors.firstName?.message}</span>
                 <br /><br />
 
-                <label>שם משפחה</label>
-                <input type="text" {...register("lastName", UserModel.lastNameValidation)} />
+                <input type="text" className="form-control" placeholder="שם משפחה" {...register("lastName", UserModel.lastNameValidation)} />
                 <span className="Error">{formState.errors.lastName?.message}</span>
                 <br /><br />
 
-                <label>דוא"ל</label>
-                <input type="email" {...register("email", UserModel.emailValidation)} />
+                <input type="email" className="form-control" placeholder="מייל" {...register("email", UserModel.emailValidation)} />
                 <span className="Error">{formState.errors.email?.message}</span>
                 <br /><br />
 
-                <label>סיסמא</label>
-                <input type="password" {...register("password", UserModel.passwordValidation)} />
+                <input type="password" className="form-control" placeholder="סיסמא" {...register("password", UserModel.passwordValidation)} />
                 <span className="Error">{formState.errors.password?.message}</span>
                 <br /><br />
 
-                <button className="ButtonRegister">הרשמה</button>
+                <button className="btn btn-primary">הרשמה</button>
                 
             </form>
 

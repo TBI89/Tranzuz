@@ -5,18 +5,13 @@
     padding: 5px;
 }
 
-.MissionList>thead, th {
-    background-color: cadetblue;
-}
-
-.MissionList>tbody,tr:nth-child(even) {
-    background-color: darkgray;
-}
-
-.MissionList>tbody,tr:nth-child(odd) {
-    background-color:cornsilk;
-}
-
 .btn-success {
    margin: 5px;
+}
+
+.EditInputBox {
+    width: 85px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px;
 }
