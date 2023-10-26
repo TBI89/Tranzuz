@@ -1,3 +1,4 @@
-.Menu {
-font-size: larger;	
+.Menu .MenuLink {
+    font-size: larger;
+    display: block;
 }

@@ -27,6 +27,11 @@ function Login(): JSX.Element {
         }
     }
 
+    // Navigate to Register component when the user clicks the "יצירת חשבון" button:
+    function navigateToRegister() {
+        navigate("/register");
+    }
+
     return (
         <div className="Login">
 
@@ -49,7 +54,10 @@ function Login(): JSX.Element {
                     <span className="Error">{formState.errors.password?.message}</span>
                     <br />
 
+                    <div className="ButtonContainer">
                     <button className="btn btn-primary">כניסה</button>
+                    <button onClick={navigateToRegister} className="btn btn-outline-primary">יצירת חשבון</button>
+                    </div>
 
                 </form>
             </div>

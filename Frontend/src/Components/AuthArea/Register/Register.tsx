@@ -5,9 +5,11 @@ import { useNavigate } from "react-router-dom";
 import notifyService from "../../../Services/NotifyService";
 import authService from "../../../Services/AuthService";
 import useTitle from "../../../Utils/UseTitle";
+import registerPageImage from "../../../Assets/Images/register-page-image.jpeg";
 
 function Register(): JSX.Element {
 
+    // Tab title:
     useTitle("Tranzuz | Register");
 
     // Form state:
@@ -26,30 +28,48 @@ function Register(): JSX.Element {
         }
     }
 
+    // Navigate to Login page when the user clicks on "התחברות" button:
+    function navigateToLogin() {
+        navigate("/login");
+    }
+
     return (
         <div className="Register">
 
-            <form onSubmit={handleSubmit(send)}>
+            <div className="ImageContainer">
+                <img src={registerPageImage} />
+            </div>
 
-                <input type="text" className="form-control" placeholder="שם פרטי" {...register("firstName", UserModel.firstNameValidation)} />
-                <span className="Error">{formState.errors.firstName?.message}</span>
-                <br /><br />
+            <div className="FormContainer">
 
-                <input type="text" className="form-control" placeholder="שם משפחה" {...register("lastName", UserModel.lastNameValidation)} />
-                <span className="Error">{formState.errors.lastName?.message}</span>
-                <br /><br />
+                <form onSubmit={handleSubmit(send)}>
 
-                <input type="email" className="form-control" placeholder="מייל" {...register("email", UserModel.emailValidation)} />
-                <span className="Error">{formState.errors.email?.message}</span>
-                <br /><br />
+                    <h2>הרשמה</h2>
 
-                <input type="password" className="form-control" placeholder="סיסמא" {...register("password", UserModel.passwordValidation)} />
-                <span className="Error">{formState.errors.password?.message}</span>
-                <br /><br />
+                    <input type="text" className="form-control" placeholder="שם פרטי" {...register("firstName", UserModel.firstNameValidation)} />
+                    <span className="Error">{formState.errors.firstName?.message}</span>
+                    <br />
 
-                <button className="btn btn-primary">הרשמה</button>
-                
-            </form>
+                    <input type="text" className="form-control" placeholder="שם משפחה" {...register("lastName", UserModel.lastNameValidation)} />
+                    <span className="Error">{formState.errors.lastName?.message}</span>
+                    <br />
+
+                    <input type="email" className="form-control" placeholder="מייל" {...register("email", UserModel.emailValidation)} />
+                    <span className="Error">{formState.errors.email?.message}</span>
+                    <br />
+
+                    <input type="password" className="form-control" placeholder="סיסמא" {...register("password", UserModel.passwordValidation)} />
+                    <span className="Error">{formState.errors.password?.message}</span>
+                    <br />
+
+                    <div className="ButtonContainer">
+                    <button className="btn btn-primary">הרשמה</button>
+                    <button onClick={navigateToLogin} className="btn btn-outline-primary">התחברות</button>
+                    </div>
+                   
+                </form>
+
+            </div>
 
         </div>
     );

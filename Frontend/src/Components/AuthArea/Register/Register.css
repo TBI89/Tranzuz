@@ -1,12 +1,46 @@
-.Register>form {
-    border: 1px solid;
-    width: 250px;
-    display: grid;
-    justify-content: center;
-    padding: 40px 0;
+.Register {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 90%;
     margin: auto;
+}
+
+.Register>.ImageContainer {
+    flex: 1;
+    display: flex;
+    margin: 0 10px 0 0;
+}
+
+.Register>.ImageContainer>img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.Register>.FormContainer {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    margin: 0 0 0 10px;
+}
+
+.Register>.FormContainer>form>h2 {
     text-align: right;
-    border-radius: 10px;
-    box-shadow: 3px 6px 9px;
-    background-color: wheat
+}
+
+.Register>.FormContainer>form>.form-control {
+    width: 500px;
+}
+
+.Register>.FormContainer>form>.ButtonContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.Register>.FormContainer>form>.ButtonContainer>.btn-primary {
+   margin-left: 10px;
+   width: 100px;
 }

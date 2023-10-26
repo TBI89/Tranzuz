@@ -1,4 +1,5 @@
 import AuthMenu from "../../AuthArea/AuthMenu/AuthMenu";
+import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import Menu from "../Menu/Menu";
 import Routing from "../Routing/Routing";
@@ -8,13 +9,22 @@ function Layout(): JSX.Element {
     return (
         <div className="Layout">
 
-            <Menu />
-            <hr />
-            <AuthMenu />
+            <header>
+                <Header />
+                <AuthMenu />
+            </header>
 
-            <Header />
+            <aside>
+                <Menu />
+            </aside>
 
-            <Routing />
+            <main>
+                <Routing />
+            </main>
+
+            <footer>
+                <Footer />
+            </footer>
 
         </div>
     );
