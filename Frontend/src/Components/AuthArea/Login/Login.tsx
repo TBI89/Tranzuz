@@ -5,6 +5,7 @@ import notifyService from "../../../Services/NotifyService";
 import authService from "../../../Services/AuthService";
 import CredentialsModel from "../../../Models/CredentialsModel";
 import useTitle from "../../../Utils/UseTitle";
+import loginPageImage from "../../../Assets/Images/login-form-image.jpg";
 
 function Login(): JSX.Element {
 
@@ -29,19 +30,29 @@ function Login(): JSX.Element {
     return (
         <div className="Login">
 
-            <form onSubmit={handleSubmit(send)}>
+            <div className="ImageContainer">
+                <img src={loginPageImage} />
+            </div>
 
-                <input type="email" className="form-control" placeholder="מייל" {...register("email", CredentialsModel.emailValidation)} />
-                <span className="Error">{formState.errors.email?.message}</span>
-                <br /><br />
+            <div className="FormContainer">
+                <form onSubmit={handleSubmit(send)}>
 
-                <input type="password" className="form-control" placeholder="סיסמא" {...register("password", CredentialsModel.passwordValidation)} />
-                <span className="Error">{formState.errors.password?.message}</span>
-                <br /><br />
+                    <h2>ברוכים השבים ל-Tranzuz</h2>
+                    <h4>טוב לראות אותך שוב!</h4>
+                    <br />
 
-                <button className="btn btn-primary">כניסה</button>
+                    <input type="email" className="form-control" placeholder="מייל" {...register("email", CredentialsModel.emailValidation)} />
+                    <span className="Error">{formState.errors.email?.message}</span>
+                    <br />
 
-            </form>
+                    <input type="password" className="form-control" placeholder="סיסמא" {...register("password", CredentialsModel.passwordValidation)} />
+                    <span className="Error">{formState.errors.password?.message}</span>
+                    <br />
+
+                    <button className="btn btn-primary">כניסה</button>
+
+                </form>
+            </div>
 
         </div>
     );
