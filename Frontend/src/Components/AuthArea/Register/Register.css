@@ -27,7 +27,8 @@
     margin: 0 0 0 10px;
 }
 
-.Register>.FormContainer>form>h2 {
+.Register>.FormContainer>form>h2,
+h3 {
     text-align: right;
 }
 
@@ -41,6 +42,6 @@
 }
 
 .Register>.FormContainer>form>.ButtonContainer>.btn-primary {
-   margin-left: 10px;
-   width: 100px;
+    margin-left: 10px;
+    width: 100px;
 }

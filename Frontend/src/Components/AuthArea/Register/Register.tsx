@@ -44,7 +44,8 @@ function Register(): JSX.Element {
 
                 <form onSubmit={handleSubmit(send)}>
 
-                    <h2>הרשמה</h2>
+                    <h2>ברוכים הבאים ל-Tranzuz</h2>
+                    <h3>הרשמו עכשיו!</h3>
 
                     <input type="text" className="form-control" placeholder="שם פרטי" {...register("firstName", UserModel.firstNameValidation)} />
                     <span className="Error">{formState.errors.firstName?.message}</span>
@@ -63,10 +64,10 @@ function Register(): JSX.Element {
                     <br />
 
                     <div className="ButtonContainer">
-                    <button className="btn btn-primary">הרשמה</button>
-                    <button onClick={navigateToLogin} className="btn btn-outline-primary">התחברות</button>
+                        <button className="btn btn-primary">הרשמה</button>
+                        <button onClick={navigateToLogin} className="btn btn-outline-primary">התחברות</button>
                     </div>
-                   
+
                 </form>
 
             </div>

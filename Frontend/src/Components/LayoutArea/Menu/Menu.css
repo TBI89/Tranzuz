@@ -2,3 +2,23 @@
     font-size: larger;
     display: block;
 }
+
+.Menu>.flex-column>.active>img {
+width: 55px;
+border-radius: 5px;
+}
+
+/* Default Dropdown opacity */
+.Menu>.flex-column>.DropdownContainer {
+    display: none;
+}
+
+/* First click opacity */
+.Menu>.flex-column>.DropdownContainer.visible {
+    display: block;
+}
+
+/* Second click opacity */
+.Menu>.flex-column>.DropdownContainer.hidden {
+    display: none;
+}
