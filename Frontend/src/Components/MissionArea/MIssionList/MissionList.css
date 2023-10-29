@@ -1,6 +1,6 @@
 /* Style for the table container */
 .MissionList {
-    width: 100%;
+    width: 97%;
     overflow-x: auto;
 }
 
@@ -10,6 +10,8 @@
     border-collapse: collapse;
     margin-bottom: 20px;
     background-color: white;
+    font-size: small;
+   
 }
 
 /* Style for table header row */
@@ -43,8 +45,7 @@ button {
 
 /* Style for edit input box */
 .EditInputBox {
-    width: 70px;
-    padding: 5px;
+    width: 60px;
 }
 
 /* Style for icons */
@@ -64,4 +65,10 @@ button {
 .ControlPointDuplicateIcon:hover,
 .EditIcon:hover {
     color: #FF5722;
+}
+
+.btn-success {
+    width: 50px;
+    font-size: small;
+    padding: 0;
 }

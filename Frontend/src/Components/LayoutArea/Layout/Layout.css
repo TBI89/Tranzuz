@@ -5,10 +5,12 @@
     grid-template-columns: repeat(9, 1fr);
 }
 
-.Layout>header, footer {
+.Layout>header,
+.Layout>footer {
     grid-column: span 9;
 }
 
 .Layout>main {
     grid-column: span 8;
+    overflow: auto;
 }

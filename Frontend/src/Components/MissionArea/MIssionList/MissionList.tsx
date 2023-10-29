@@ -10,6 +10,7 @@ import missionsService from "../../../Services/MissionsService";
 import notifyService from "../../../Services/NotifyService";
 import useTitle from "../../../Utils/UseTitle";
 import "./MissionList.css";
+import Footer from '../../LayoutArea/Footer/Footer';
 
 function MissionList(): JSX.Element {
 

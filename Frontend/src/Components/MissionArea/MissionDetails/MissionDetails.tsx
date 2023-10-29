@@ -5,6 +5,8 @@ import missionsService from "../../../Services/MissionsService";
 import { useNavigate, useParams } from "react-router-dom";
 import notifyService from "../../../Services/NotifyService";
 import useTitle from "../../../Utils/UseTitle";
+import InfoIcon from '@mui/icons-material/Info';
+import { NavLink } from "react-router-dom";
 
 function MissionDetails(): JSX.Element {
 
@@ -36,6 +38,8 @@ function MissionDetails(): JSX.Element {
 
     return (
         <div className="MissionDetails">
+            <NavLink className="NavLinkToMissions" to={"/missions"}>חזרה ליומן</NavLink>
+            <h2><InfoIcon /> פרטי קו</h2>
             <h3>מזהה קו: {mission?.lineData.lineId}</h3>
             <h3>מספר קו: {mission?.lineData.lineNumber}</h3>
             <h3>כיוון: {mission?.lineData.direction}</h3>
