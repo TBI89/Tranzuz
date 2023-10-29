@@ -1,24 +1,39 @@
-.Menu .MenuLink {
-    font-size: larger;
+/* Menu Link Styling */
+.Menu .nav-link.active img {
+    width: 35px;
+    border-radius: 5px;
+}
+
+.Menu>.flex-column {
+    border-radius: 10px;
+    margin: 0 50px;
+    background-color: white;
+}
+
+/* MainNavLinkContainer Styling */
+.MainNavLinkContainer {
+    position: relative;
+    display: inline-block;
+    margin: 20px 0 20px 0;
+}
+
+/* Dropdown Container Styling */
+.MainNavLinkContainer .DropdownContainer {
     display: block;
+    opacity: 0;
+    width: 0;
+    position: absolute;
+    top: 0;
+    transition: right 0.3s ease, width 0.3s ease, opacity 0.3s ease;
+    overflow: hidden;
 }
 
-.Menu>.flex-column>.active>img {
-width: 55px;
-border-radius: 5px;
-}
-
-/* Default Dropdown opacity */
-.Menu>.flex-column>.DropdownContainer {
-    display: none;
-}
-
-/* First click opacity */
-.Menu>.flex-column>.DropdownContainer.visible {
-    display: block;
-}
-
-/* Second click opacity */
-.Menu>.flex-column>.DropdownContainer.hidden {
-    display: none;
+/* Dropdown Container Visibility (First Click) */
+.MainNavLinkContainer:hover .DropdownContainer {
+    right: 70%;
+    width: 200px;
+    opacity: 1;
+    border-radius: 5px;
+    background-color: white;
+    margin: 0 40px;
 }

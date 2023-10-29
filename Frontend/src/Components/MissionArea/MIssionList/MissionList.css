@@ -1,17 +1,67 @@
-.MissionList>table, th, td {
-	border: 1px solid;
+/* Style for the table container */
+.MissionList {
+    width: 100%;
+    overflow-x: auto;
+}
+
+/* Style for the table */
+.MissionList>table {
+    width: 100%;
     border-collapse: collapse;
-    margin: auto;
+    margin-bottom: 20px;
+    background-color: white;
+}
+
+/* Style for table header row */
+.MissionList>table>thead>tr>th {
+    background-color: #2196F3;
+    color: white;
+    text-align: center;
+    padding: 0 10px 0 10px;
+}
+
+/* Style for table body rows */
+.MissionList>table>tbody>tr>td {
+    text-align: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+/* Style for table body rows on hover */
+.MissionList>table>tbody>tr:hover {
+    background-color: #f5f5f5;
+}
+
+/* Style for buttons inside table cells */
+button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: inherit;
+    color: inherit;
+}
+
+/* Style for edit input box */
+.EditInputBox {
+    width: 70px;
     padding: 5px;
 }
 
-.btn-success {
-   margin: 5px;
+/* Style for icons */
+.InfoIcon,
+.DeleteIcon,
+.ControlPointDuplicateIcon,
+.EditIcon {
+    font-size: 20px;
+    color: #2196F3;
+    cursor: pointer;
+    margin-right: 5px;
 }
 
-.EditInputBox {
-    width: 85px;
-    text-align: center;
-    border-radius: 10px;
-    box-shadow: 1px 1px 1px;
+/* Style for icons on hover */
+.InfoIcon:hover,
+.DeleteIcon:hover,
+.ControlPointDuplicateIcon:hover,
+.EditIcon:hover {
+    color: #FF5722;
 }

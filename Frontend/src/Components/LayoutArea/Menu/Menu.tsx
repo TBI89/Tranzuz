@@ -35,27 +35,36 @@ function Menu(): JSX.Element {
 
                 <NavLink className="nav-link active" aria-current="page" to="/home"><img src={homePageLogo} /></NavLink>
 
-                <NavLink to={"#"} onClick={handleNavLinkClick} data-dropdown-name="microMobility"><DirectionsBikeIcon />מיקרו מוביליטי</NavLink>
-                <div className={`DropdownContainer ${isDropdownVisible.microMobility ? "visible" : "hidden"}`}>
-                    <NavLink className="nav-link active" aria-current="page" to="/#">מיקרו מוביליטי</NavLink>
+                <div className="MainNavLinkContainer">
+                    <NavLink to={"#"} onClick={handleNavLinkClick} data-dropdown-name="microMobility"><DirectionsBikeIcon /></NavLink>
+                    <div className={`DropdownContainer ${isDropdownVisible.microMobility ? "visible" : "hidden"}`}>
+                        <NavLink className="nav-link active" aria-current="page" to="/#">מיקרו מוביליטי</NavLink>
+                    </div>
                 </div>
 
-                <NavLink to={"#"} onClick={handleNavLinkClick} data-dropdown-name="publicTransportation"><DirectionsBusIcon />תחבורה ציבורית</NavLink>
-                <div className={`DropdownContainer ${isDropdownVisible.publicTransportation ? "visible" : "hidden"}`}>
-                    <NavLink className="nav-link active" aria-current="page" to="/#">יומן סדרן תח"צ </NavLink>
-                    <NavLink className="nav-link active" aria-current="page" to="/#">מפות תכנון</NavLink>
+                <div className="MainNavLinkContainer">
+                    <NavLink to={"#"} onClick={handleNavLinkClick} data-dropdown-name="publicTransportation"><DirectionsBusIcon /></NavLink>
+                    <div className={`DropdownContainer ${isDropdownVisible.publicTransportation ? "visible" : "hidden"}`}>
+                        <NavLink className="nav-link active" aria-current="page" to="/missions">יומן סדרן תח"צ </NavLink>
+                        <NavLink className="nav-link active" aria-current="page" to="/#">מפות תכנון</NavLink>
+                    </div>
                 </div>
 
-                <NavLink to={"#"} onClick={handleNavLinkClick} data-dropdown-name="shipping"><LocalShippingIcon />שילוח</NavLink>
-                <div className={`DropdownContainer ${isDropdownVisible.shipping ? "visible" : "hidden"}`}>
-                    <NavLink className="nav-link active" aria-current="page" to="/#">תובלה קרקעית</NavLink>
-                    <NavLink className="nav-link active" aria-current="page" to="/#">שילוח ימי</NavLink>
+                <div className="MainNavLinkContainer">
+                    <NavLink to={"#"} onClick={handleNavLinkClick} data-dropdown-name="shipping"><LocalShippingIcon /></NavLink>
+                    <div className={`DropdownContainer ${isDropdownVisible.shipping ? "visible" : "hidden"}`}>
+                        <NavLink className="nav-link active" aria-current="page" to="/#">תובלה קרקעית</NavLink>
+                        <NavLink className="nav-link active" aria-current="page" to="/#">שילוח ימי</NavLink>
+                    </div>
                 </div>
 
-                <NavLink to={"#"} onClick={handleNavLinkClick} data-dropdown-name="privateTrans"><LocalTaxiIcon />היסעים</NavLink>
-                <div className={`DropdownContainer ${isDropdownVisible.privateTrans ? "visible" : "hidden"}`}>
-                    <NavLink className="nav-link active" aria-current="page" to="/#">תכנון מסלולים</NavLink>
+                <div className="MainNavLinkContainer">
+                    <NavLink to={"#"} onClick={handleNavLinkClick} data-dropdown-name="privateTrans"><LocalTaxiIcon /></NavLink>
+                    <div className={`DropdownContainer ${isDropdownVisible.privateTrans ? "visible" : "hidden"}`}>
+                        <NavLink className="nav-link active" aria-current="page" to="/#">תכנון מסלולים</NavLink>
+                    </div>
                 </div>
+
 
             </nav>
         </div>

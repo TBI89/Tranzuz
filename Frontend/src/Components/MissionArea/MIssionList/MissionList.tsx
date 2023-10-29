@@ -115,10 +115,10 @@ function MissionList(): JSX.Element {
 
         <div className="MissionList">
 
-            <table className='table table-sm  table-warning table-hover'>
+            <table>
 
                 <thead>
-                    <tr className='table table-info'>
+                    <tr>
                         <th>פרטים</th>
                         <th>מחיקה</th>
                         <th>שכפול</th>
