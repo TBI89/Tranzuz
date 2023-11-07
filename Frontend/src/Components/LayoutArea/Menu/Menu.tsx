@@ -33,7 +33,7 @@ function Menu(): JSX.Element {
         <div className="Menu">
             <nav className="nav flex-column">
 
-                <NavLink className="nav-link active" aria-current="page" to="/home"><img src={homePageLogo} /></NavLink>
+                <NavLink className="nav-link active" aria-current="page" to="/register"><img src={homePageLogo} /></NavLink>
 
                 <div className="MainNavLinkContainer">
                     <NavLink to={"#"} onClick={handleNavLinkClick} data-dropdown-name="microMobility"><DirectionsBikeIcon /></NavLink>

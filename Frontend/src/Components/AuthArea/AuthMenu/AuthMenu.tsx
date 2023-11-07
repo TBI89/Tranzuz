@@ -26,20 +26,11 @@ function AuthMenu(): JSX.Element {
 
     return (
         <div className="AuthMenu">
-
-            {/* Conditional rendering for guests / logged in users:  */}
-            {!user &&
-                <div>
-                    <span>שלום אורח | </span>
-                    <NavLink to={"/login"}>כניסה</NavLink>
-                    <span> | </span>
-                    <NavLink to={"/register"}>הרשמה</NavLink>
-                </div>
-            }
+            
             {user &&
             <div>
                 <span>שלום {user.firstName} {user.lastName} | </span>
-                <NavLink to={"/home"} onClick={logoutUser}>התנתק/י</NavLink>
+                <NavLink to={"/register"} onClick={logoutUser}>התנתק/י</NavLink>
             </div>
             }
 

@@ -1,8 +1,9 @@
-import DeleteIcon from '@mui/icons-material/Delete';
-import InfoIcon from '@mui/icons-material/Info';
-import EditIcon from '@mui/icons-material/Edit';
 import ControlPointDuplicateIcon from '@mui/icons-material/ControlPointDuplicate';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import InfoIcon from '@mui/icons-material/Info';
 import { useEffect, useState } from "react";
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { NavLink, useNavigate } from "react-router-dom";
 import MissionModel from "../../../Models/MissionModel";
 import { MissionActionObject, MissionActionType, missionStore } from "../../../Redux/MissionState";
@@ -10,7 +11,6 @@ import missionsService from "../../../Services/MissionsService";
 import notifyService from "../../../Services/NotifyService";
 import useTitle from "../../../Utils/UseTitle";
 import "./MissionList.css";
-import Footer from '../../LayoutArea/Footer/Footer';
 
 function MissionList(): JSX.Element {
 
@@ -22,6 +22,7 @@ function MissionList(): JSX.Element {
     const [editedValues, setEditedValues] = useState<Record<string, string>>({
         departureTime: ""
     });
+    const [isOptionsClicked, setIsOptionsClicked] = useState<boolean>(false);
 
     const navigate = useNavigate(); // use to redirect the user when needed.
 
@@ -112,6 +113,13 @@ function MissionList(): JSX.Element {
         }
     }
 
+    // When the user clicks the "אפשרויות" button, the "optionsMenuContainer" items will be displayed:
+    function handleOptionClick() {
+        setIsOptionsClicked(!isOptionsClicked);
+        console.log("Click!");
+        console.log(isOptionsClicked); 
+    }
+
     return (
 
         <div className="MissionList">
@@ -120,9 +128,7 @@ function MissionList(): JSX.Element {
 
                 <thead>
                     <tr>
-                        <th>פרטים</th>
-                        <th>מחיקה</th>
-                        <th>שכפול</th>
+                        <th>אפשרויות</th>
                         <th>מזהה קו</th>
                         <th>מספר קו</th>
                         <th>כיוון</th>
@@ -148,9 +154,16 @@ function MissionList(): JSX.Element {
                 <tbody>
                     {missions.map(m =>
                         <tr key={m._id}>
-                            <td>{<NavLink to={`/missions/${m._id}`}><InfoIcon /></NavLink>}</td>
-                            <td>{<button onClick={() => deleteMission(m._id)}><DeleteIcon /></button>}</td>
-                            <td>{<button onClick={() => duplicateMission(m._id)}><ControlPointDuplicateIcon /></button>}</td>
+                            <td>
+                                <button onClick={handleOptionClick}><MoreHorizIcon /></button>
+                                <div className={`OptionsMenuContainer ${isOptionsClicked ? 'visible' : ''}`}>
+                                    <span>{<NavLink to={`/missions/${m._id}`}><InfoIcon /></NavLink>}</span>
+                                    <br />
+                                    <span>{<button onClick={() => deleteMission(m._id)}><DeleteIcon /></button>}</span>
+                                    <br />
+                                    <span>{<button onClick={() => duplicateMission(m._id)}><ControlPointDuplicateIcon /></button>}</span>
+                                </div>
+                            </td>
                             <td>{m.lineData.lineId}</td>
                             <td>{m.lineData.lineNumber}</td>
                             <td>{m.lineData.direction}</td>

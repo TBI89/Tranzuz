@@ -1,5 +1,4 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import Home from "../../HomeArea/Home/Home";
 import PageNotFound from "../PageNotFound/PageNotFound";
 import Register from "../../AuthArea/Register/Register";
 import Login from "../../AuthArea/Login/Login";
@@ -13,8 +12,7 @@ function Routing(): JSX.Element {
             <Route path="/login" element={<Login />} />
             <Route path="/missions" element={<MissionList />} />
             <Route path="/missions/:_id" element={<MissionDetails />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/" element={<Navigate to="/home" />} />
+            <Route path="/" element={<Navigate to="/register" />} />
             <Route path="*" element={<PageNotFound />} />
         </Routes>
     );
