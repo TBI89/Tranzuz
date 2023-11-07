@@ -22,7 +22,7 @@ function MissionList(): JSX.Element {
     const [editedValues, setEditedValues] = useState<Record<string, string>>({
         departureTime: ""
     });
-    const [isOptionsClicked, setIsOptionsClicked] = useState<boolean>(false);
+    const [isOptionsClicked, setIsOptionsClicked] = useState<string>(null);
 
     const navigate = useNavigate(); // use to redirect the user when needed.
 
@@ -114,10 +114,9 @@ function MissionList(): JSX.Element {
     }
 
     // When the user clicks the "אפשרויות" button, the "optionsMenuContainer" items will be displayed:
-    function handleOptionClick() {
-        setIsOptionsClicked(!isOptionsClicked);
-        console.log("Click!");
-        console.log(isOptionsClicked); 
+    function handleOptionClick(event: React.MouseEvent<HTMLButtonElement, MouseEvent>, mission_id: string) {
+        event.stopPropagation(); // Prevent the event from reaching parent elements if necessary
+        setIsOptionsClicked(prevState => (prevState === mission_id ? null : mission_id));
     }
 
     return (
@@ -155,8 +154,8 @@ function MissionList(): JSX.Element {
                     {missions.map(m =>
                         <tr key={m._id}>
                             <td>
-                                <button onClick={handleOptionClick}><MoreHorizIcon /></button>
-                                <div className={`OptionsMenuContainer ${isOptionsClicked ? 'visible' : ''}`}>
+                                <button onClick={(e) => handleOptionClick(e, m._id)}><MoreHorizIcon /></button>
+                                <div className={`OptionsMenuContainer ${isOptionsClicked === m._id ? 'visible' : ''}`}>
                                     <span>{<NavLink to={`/missions/${m._id}`}><InfoIcon /></NavLink>}</span>
                                     <br />
                                     <span>{<button onClick={() => deleteMission(m._id)}><DeleteIcon /></button>}</span>
