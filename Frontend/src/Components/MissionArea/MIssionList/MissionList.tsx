@@ -116,8 +116,18 @@ function MissionList(): JSX.Element {
     // When the user clicks the "אפשרויות" button, the "optionsMenuContainer" items will be displayed:
     function handleOptionClick(event: React.MouseEvent<HTMLButtonElement, MouseEvent>, mission_id: string) {
         event.stopPropagation(); // Prevent the event from reaching parent elements if necessary
-        setIsOptionsClicked(prevState => (prevState === mission_id ? null : mission_id));
+
+        const rect = event.currentTarget.getBoundingClientRect();
+        const tooltip = document.querySelector(`#tooltip-${mission_id}`) as HTMLElement | null;
+
+        if (tooltip) {
+            tooltip.style.top = `${rect.top + window.scrollY}px`;
+            tooltip.style.left = `${rect.right + window.scrollX}px`;
+            setIsOptionsClicked(prevState => (prevState === mission_id ? null : mission_id));
+        }
+
     }
+
 
     return (
 
@@ -154,14 +164,7 @@ function MissionList(): JSX.Element {
                     {missions.map(m =>
                         <tr key={m._id}>
                             <td>
-                                <button onClick={(e) => handleOptionClick(e, m._id)}><MoreHorizIcon /></button>
-                                <div className={`OptionsMenuContainer ${isOptionsClicked === m._id ? 'visible' : ''}`}>
-                                    <span>{<NavLink to={`/missions/${m._id}`}><InfoIcon /></NavLink>}</span>
-                                    <br />
-                                    <span>{<button onClick={() => deleteMission(m._id)}><DeleteIcon /></button>}</span>
-                                    <br />
-                                    <span>{<button onClick={() => duplicateMission(m._id)}><ControlPointDuplicateIcon /></button>}</span>
-                                </div>
+                                <button onClick={e => handleOptionClick(e, m._id)}><MoreHorizIcon /></button>
                             </td>
                             <td>{m.lineData.lineId}</td>
                             <td>{m.lineData.lineNumber}</td>
@@ -209,6 +212,14 @@ function MissionList(): JSX.Element {
                 </tbody>
 
             </table>
+
+            {missions.map(m =>
+                <div key={m._id} id={`tooltip-${m._id}`} className={`OptionsMenuContainer ${isOptionsClicked === m._id ? 'visible' : ''}`}>
+                    <span>{<NavLink to={`/missions/${m._id}`}><InfoIcon /></NavLink>}</span>
+                    <span>{<button onClick={() => deleteMission(m._id)}><DeleteIcon /></button>}</span>
+                    <span>{<button onClick={() => duplicateMission(m._id)}><ControlPointDuplicateIcon /></button>}</span>
+                </div>
+            )}
 
         </div>
     );
