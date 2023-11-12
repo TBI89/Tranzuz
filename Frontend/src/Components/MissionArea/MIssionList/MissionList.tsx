@@ -2,6 +2,8 @@ import ControlPointDuplicateIcon from '@mui/icons-material/ControlPointDuplicate
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import InfoIcon from '@mui/icons-material/Info';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { useEffect, useState } from "react";
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { NavLink, useNavigate } from "react-router-dom";
@@ -23,6 +25,8 @@ function MissionList(): JSX.Element {
         departureTime: ""
     });
     const [isOptionsClicked, setIsOptionsClicked] = useState<string>(null);
+    const [currentPage, setCurrentPage] = useState<number>(1);
+    const rowsPerPage = 10;
 
     const navigate = useNavigate(); // use to redirect the user when needed.
 
@@ -35,6 +39,19 @@ function MissionList(): JSX.Element {
                 if (err.response?.status === 401) navigate("/login"); // Navigate to login page if the user didn't identified.
             });
     }, [navigate]);
+
+    // Calculate total number of pages:
+    const totalPages = Math.ceil(missions.length / rowsPerPage);
+
+    // Display the next page data when the user clicks the page button:
+    function handlePageChange(page: number) {
+        setCurrentPage(page);
+    }
+
+    // Divide into pages:
+    const indexOfLastMission = currentPage * rowsPerPage;
+    const indexOfFirstMission = indexOfLastMission - rowsPerPage;
+    const currentMissions = missions.slice(indexOfFirstMission, indexOfLastMission);
 
     // Fetch the _id of the mission when user clicks the related column:
     function handleEditing(missionId: string) {
@@ -128,7 +145,6 @@ function MissionList(): JSX.Element {
 
     }
 
-
     return (
 
         <div className="MissionList">
@@ -161,10 +177,10 @@ function MissionList(): JSX.Element {
                 </thead>
 
                 <tbody>
-                    {missions.map(m =>
-                        <tr key={m._id}>
+                    {currentMissions.map(m =>
+                        <tr key={m._id} className={`source-${m.sourceId} default`}>
                             <td>
-                                <button onClick={e => handleOptionClick(e, m._id)}><MoreHorizIcon /></button>
+                                <button className='OptionsButton' onClick={e => handleOptionClick(e, m._id)}><MoreHorizIcon /></button>
                             </td>
                             <td>{m.lineData.lineId}</td>
                             <td>{m.lineData.lineNumber}</td>
@@ -213,6 +229,7 @@ function MissionList(): JSX.Element {
 
             </table>
 
+            {/* Tooltip options: */}
             {missions.map(m =>
                 <div key={m._id} id={`tooltip-${m._id}`} className={`OptionsMenuContainer ${isOptionsClicked === m._id ? 'visible' : ''}`}>
                     <span>{<NavLink to={`/missions/${m._id}`}><InfoIcon /></NavLink>}</span>
@@ -220,6 +237,38 @@ function MissionList(): JSX.Element {
                     <span>{<button onClick={() => duplicateMission(m._id)}><ControlPointDuplicateIcon /></button>}</span>
                 </div>
             )}
+
+            {/* Pagination section: */}
+            <div className="Pagination">
+
+                {/* Previous page button: */}
+                <button
+                    onClick={() => handlePageChange(currentPage - 1)}
+                    className={`PaginationButton${currentPage === 1 ? "Disabled" : ""}`}
+                    disabled={currentPage === 1}
+                ><ArrowForwardIosIcon /></button>
+
+                {/* Page number buttons: */}
+                {missions.length > 0 && currentMissions.length < rowsPerPage
+                    ? null
+                    : Array.from({ length: totalPages }, (_, index) => (
+                        <button
+                            key={index}
+                            onClick={() => handlePageChange(index + 1)}
+                            className={`PaginationButton${currentPage === index + 1 ? "Active" : ""}`}
+                        >
+                            {/* Display the number page on each button: */}
+                            {index + 1}
+                        </button>
+                    ))}
+
+                {/* Next page button: */}
+                <button
+                    onClick={() => handlePageChange(currentPage + 1)}
+                    className={`PaginationButton${currentPage === totalPages ? "Disabled" : ""}`}
+                    disabled={currentPage === totalPages}
+                ><ArrowBackIosNewIcon /></button>
+            </div>
 
         </div>
     );
