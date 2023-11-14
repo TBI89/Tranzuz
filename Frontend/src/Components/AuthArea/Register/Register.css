@@ -2,8 +2,16 @@
     display: flex;
     flex-direction: row;
     height: 100%;
-    width: 90%;
+    width: 100%;
     margin: auto;
+}
+
+.Register>div>.LogoImage {
+    max-width: 60px;
+    position: absolute;
+    top: 2%;
+    right: 2%;
+    border-radius: 10px;
 }
 
 .Register>.ImageContainer {
@@ -13,9 +21,8 @@
 }
 
 .Register>.ImageContainer>img {
-    height: 100%;
+    height: 80%;
     width: 100%;
-    object-fit: cover;
 }
 
 .Register>.FormContainer {

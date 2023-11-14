@@ -7,7 +7,7 @@
 .Menu>.flex-column {
     border-radius: 10px;
     margin: 0 50px;
-    background-color: white;
+    background-color:#2196F3;
 }
 
 /* MainNavLinkContainer Styling */
@@ -26,6 +26,7 @@
     top: 0;
     transition: right 0.3s ease, width 0.3s ease, opacity 0.3s ease;
     overflow: hidden;
+    z-index: 1;
 }
 
 /* Dropdown Container Visibility (First Click) */
@@ -34,6 +35,11 @@
     width: 200px;
     opacity: 1;
     border-radius: 5px;
-    background-color: white;
+    background-color:#2196F3;
     margin: 0 40px;
+}
+
+.Menu>.nav>.MainNavLinkContainer>.DropdownContainer>.nav-link {
+    color: black;
+    font-weight: 500;
 }

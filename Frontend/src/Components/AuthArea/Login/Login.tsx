@@ -5,15 +5,26 @@ import notifyService from "../../../Services/NotifyService";
 import authService from "../../../Services/AuthService";
 import CredentialsModel from "../../../Models/CredentialsModel";
 import useTitle from "../../../Utils/UseTitle";
-import loginPageImage from "../../../Assets/Images/login-form-image.jpg";
+import loginPageImage from "../../../Assets/Images/register-form-image.jpg";
+import logoImage from "../../../Assets/Images/home-page-logo.webp";
+import { useEffect, useState } from "react";
+import { authStore } from "../../../Redux/AuthState";
 
 function Login(): JSX.Element {
 
     useTitle("Tranzuz | Login");
 
-    // Form state:
-    const { register, handleSubmit, formState } = useForm<CredentialsModel>();
+    const { register, handleSubmit, formState } = useForm<CredentialsModel>(); // Form state.
     const navigate = useNavigate(); // We use it when the user submits the form.
+
+    // If the user is logged in don't allow access to the login page:
+    useEffect(() => {
+        const loggedInUser = authStore.getState().token;
+        if (loggedInUser) {
+            navigate("/missions");
+            return;
+        }
+    }, []);
 
     // Send new user to backend & notify and redirect to the missions page:
     async function send(credentials: CredentialsModel) {
@@ -39,6 +50,10 @@ function Login(): JSX.Element {
                 <img src={loginPageImage} />
             </div>
 
+            <div>
+                <img className="LogoImage" src={logoImage} />
+            </div>
+
             <div className="FormContainer">
                 <form onSubmit={handleSubmit(send)}>
 
@@ -55,8 +70,8 @@ function Login(): JSX.Element {
                     <br />
 
                     <div className="ButtonContainer">
-                    <button className="btn btn-primary">כניסה</button>
-                    <button onClick={navigateToRegister} className="btn btn-outline-primary">יצירת חשבון</button>
+                        <button className="btn btn-primary">כניסה</button>
+                        <button onClick={navigateToRegister} className="btn btn-outline-primary">יצירת חשבון</button>
                     </div>
 
                 </form>

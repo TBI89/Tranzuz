@@ -5,7 +5,10 @@ import { useNavigate } from "react-router-dom";
 import notifyService from "../../../Services/NotifyService";
 import authService from "../../../Services/AuthService";
 import useTitle from "../../../Utils/UseTitle";
-import registerPageImage from "../../../Assets/Images/register-page-image.jpeg";
+import registerPageImage from "../../../Assets/Images/register-form-image.jpg";
+import logoImage from "../../../Assets/Images/home-page-logo.webp";
+import { useEffect } from "react";
+import { authStore } from "../../../Redux/AuthState";
 
 function Register(): JSX.Element {
 
@@ -15,6 +18,15 @@ function Register(): JSX.Element {
     // Form state:
     const { register, handleSubmit, formState } = useForm<UserModel>();
     const navigate = useNavigate(); // We use it when the user submits the form.
+
+    // if the user is logged in, don't allow access to the register page:
+    useEffect(() => {
+        const loggedInUser = authStore.getState().token;
+        if (loggedInUser) {
+            navigate("/missions");
+            return;
+        }
+    }, []);
 
     // Send new user to backend & notify and redirect to the missions page:
     async function send(user: UserModel) {
@@ -38,6 +50,10 @@ function Register(): JSX.Element {
 
             <div className="ImageContainer">
                 <img src={registerPageImage} />
+            </div>
+
+            <div >
+                <img className="LogoImage" src={logoImage} />
             </div>
 
             <div className="FormContainer">

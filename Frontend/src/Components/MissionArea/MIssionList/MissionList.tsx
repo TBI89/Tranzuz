@@ -4,6 +4,8 @@ import EditIcon from '@mui/icons-material/Edit';
 import InfoIcon from '@mui/icons-material/Info';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import DataUsageIcon from '@mui/icons-material/DataUsage';
+import BarChartIcon from '@mui/icons-material/BarChart';
 import { useEffect, useState } from "react";
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { NavLink, useNavigate } from "react-router-dom";
@@ -249,7 +251,7 @@ function MissionList(): JSX.Element {
                 ><ArrowForwardIosIcon /></button>
 
                 {/* Page number buttons: */}
-                {missions.length > 0 && currentMissions.length < rowsPerPage
+                {missions.length > 0 && currentMissions.length < rowsPerPage && currentPage !== totalPages
                     ? null
                     : Array.from({ length: totalPages }, (_, index) => (
                         <button
@@ -268,6 +270,11 @@ function MissionList(): JSX.Element {
                     className={`PaginationButton${currentPage === totalPages ? "Disabled" : ""}`}
                     disabled={currentPage === totalPages}
                 ><ArrowBackIosNewIcon /></button>
+            </div>
+
+            <div className='ReportButtonContainer'>
+                <NavLink className="ReportButton" to={'/single-month-report'}><DataUsageIcon fontSize='large' /></NavLink>
+                <NavLink className="ReportButton" to={'/multi-month-report'}><BarChartIcon fontSize='large' /></NavLink>
             </div>
 
         </div>
